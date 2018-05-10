@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  QYLHomeController.h
 //  PhotoClips
 //
 //  Created by Marshal on 2018/5/10.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface QYLHomeController : UIViewController
 
 @end
-

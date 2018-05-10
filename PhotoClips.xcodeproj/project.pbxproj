@@ -8,13 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		F3AB8EB220A42E4C00EA1F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EB120A42E4C00EA1F05 /* AppDelegate.m */; };
-		F3AB8EB520A42E4C00EA1F05 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EB420A42E4C00EA1F05 /* ViewController.m */; };
-		F3AB8EB820A42E4C00EA1F05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3AB8EB620A42E4C00EA1F05 /* Main.storyboard */; };
 		F3AB8EBA20A42E4E00EA1F05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3AB8EB920A42E4E00EA1F05 /* Assets.xcassets */; };
 		F3AB8EBD20A42E4E00EA1F05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3AB8EBB20A42E4E00EA1F05 /* LaunchScreen.storyboard */; };
 		F3AB8EC020A42E4E00EA1F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EBF20A42E4E00EA1F05 /* main.m */; };
 		F3AB8ECA20A42E4F00EA1F05 /* PhotoClipsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EC920A42E4F00EA1F05 /* PhotoClipsTests.m */; };
 		F3AB8ED520A42E4F00EA1F05 /* PhotoClipsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8ED420A42E4F00EA1F05 /* PhotoClipsUITests.m */; };
+		F3AB8EEF20A4324700EA1F05 /* QYLAuthorizationHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EEB20A4324700EA1F05 /* QYLAuthorizationHandle.m */; };
+		F3AB8EF020A4324700EA1F05 /* QYLNaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EED20A4324700EA1F05 /* QYLNaviView.m */; };
+		F3AB8EF720A432EC00EA1F05 /* QYLHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EF520A432EC00EA1F05 /* QYLHomeController.m */; };
+		F3AB8EF820A432EC00EA1F05 /* QYLHomeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3AB8EF620A432EC00EA1F05 /* QYLHomeController.xib */; };
+		F3AB8EFB20A44ACC00EA1F05 /* QYLPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EFA20A44ACC00EA1F05 /* QYLPhotoManager.m */; };
+		F3AB8F0420A44C4100EA1F05 /* QYLDefaultNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EFE20A44C4100EA1F05 /* QYLDefaultNumber.m */; };
+		F3AB8F0520A44C4100EA1F05 /* QYLCommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EFF20A44C4100EA1F05 /* QYLCommonUtil.m */; };
+		F3AB8F0620A44C4100EA1F05 /* QYLToast.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8F0120A44C4100EA1F05 /* QYLToast.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,9 +44,6 @@
 		F3AB8EAD20A42E4C00EA1F05 /* PhotoClips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoClips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AB8EB020A42E4C00EA1F05 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F3AB8EB120A42E4C00EA1F05 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F3AB8EB320A42E4C00EA1F05 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F3AB8EB420A42E4C00EA1F05 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		F3AB8EB720A42E4C00EA1F05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F3AB8EB920A42E4E00EA1F05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3AB8EBC20A42E4E00EA1F05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3AB8EBE20A42E4E00EA1F05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +54,23 @@
 		F3AB8ED020A42E4F00EA1F05 /* PhotoClipsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoClipsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AB8ED420A42E4F00EA1F05 /* PhotoClipsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoClipsUITests.m; sourceTree = "<group>"; };
 		F3AB8ED620A42E4F00EA1F05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3AB8EEA20A4324700EA1F05 /* QYLAuthorizationHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYLAuthorizationHandle.h; sourceTree = "<group>"; };
+		F3AB8EEB20A4324700EA1F05 /* QYLAuthorizationHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYLAuthorizationHandle.m; sourceTree = "<group>"; };
+		F3AB8EED20A4324700EA1F05 /* QYLNaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYLNaviView.m; sourceTree = "<group>"; };
+		F3AB8EEE20A4324700EA1F05 /* QYLNaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYLNaviView.h; sourceTree = "<group>"; };
+		F3AB8EF420A432EC00EA1F05 /* QYLHomeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLHomeController.h; sourceTree = "<group>"; };
+		F3AB8EF520A432EC00EA1F05 /* QYLHomeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLHomeController.m; sourceTree = "<group>"; };
+		F3AB8EF620A432EC00EA1F05 /* QYLHomeController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYLHomeController.xib; sourceTree = "<group>"; };
+		F3AB8EF920A44ACC00EA1F05 /* QYLPhotoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotoManager.h; sourceTree = "<group>"; };
+		F3AB8EFA20A44ACC00EA1F05 /* QYLPhotoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotoManager.m; sourceTree = "<group>"; };
+		F3AB8EFE20A44C4100EA1F05 /* QYLDefaultNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYLDefaultNumber.m; sourceTree = "<group>"; };
+		F3AB8EFF20A44C4100EA1F05 /* QYLCommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYLCommonUtil.m; sourceTree = "<group>"; };
+		F3AB8F0020A44C4100EA1F05 /* QYLToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYLToast.h; sourceTree = "<group>"; };
+		F3AB8F0120A44C4100EA1F05 /* QYLToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYLToast.m; sourceTree = "<group>"; };
+		F3AB8F0220A44C4100EA1F05 /* QYLDefaultNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYLDefaultNumber.h; sourceTree = "<group>"; };
+		F3AB8F0320A44C4100EA1F05 /* QYLCommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYLCommonUtil.h; sourceTree = "<group>"; };
+		F3AB8F0720A44C4600EA1F05 /* QYLMarco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLMarco.h; sourceTree = "<group>"; };
+		F3AB8F0820A44C7F00EA1F05 /* QYLPhotoClips.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotoClips.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +121,12 @@
 		F3AB8EAF20A42E4C00EA1F05 /* PhotoClips */ = {
 			isa = PBXGroup;
 			children = (
+				F3AB8EFD20A44C2800EA1F05 /* Commont */,
+				F3AB8EE220A431E500EA1F05 /* Lib */,
+				F3AB8EE320A431EB00EA1F05 /* Scance */,
 				F3AB8EB020A42E4C00EA1F05 /* AppDelegate.h */,
 				F3AB8EB120A42E4C00EA1F05 /* AppDelegate.m */,
-				F3AB8EB320A42E4C00EA1F05 /* ViewController.h */,
-				F3AB8EB420A42E4C00EA1F05 /* ViewController.m */,
-				F3AB8EB620A42E4C00EA1F05 /* Main.storyboard */,
+				F3AB8F0820A44C7F00EA1F05 /* QYLPhotoClips.pch */,
 				F3AB8EB920A42E4E00EA1F05 /* Assets.xcassets */,
 				F3AB8EBB20A42E4E00EA1F05 /* LaunchScreen.storyboard */,
 				F3AB8EBE20A42E4E00EA1F05 /* Info.plist */,
@@ -130,6 +151,67 @@
 				F3AB8ED620A42E4F00EA1F05 /* Info.plist */,
 			);
 			path = PhotoClipsUITests;
+			sourceTree = "<group>";
+		};
+		F3AB8EE220A431E500EA1F05 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				F3AB8EE920A4324700EA1F05 /* Authority */,
+				F3AB8EEC20A4324700EA1F05 /* NaviView */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		F3AB8EE320A431EB00EA1F05 /* Scance */ = {
+			isa = PBXGroup;
+			children = (
+				F3AB8EFC20A44AD000EA1F05 /* Photos */,
+				F3AB8EF420A432EC00EA1F05 /* QYLHomeController.h */,
+				F3AB8EF520A432EC00EA1F05 /* QYLHomeController.m */,
+				F3AB8EF620A432EC00EA1F05 /* QYLHomeController.xib */,
+			);
+			path = Scance;
+			sourceTree = "<group>";
+		};
+		F3AB8EE920A4324700EA1F05 /* Authority */ = {
+			isa = PBXGroup;
+			children = (
+				F3AB8EEA20A4324700EA1F05 /* QYLAuthorizationHandle.h */,
+				F3AB8EEB20A4324700EA1F05 /* QYLAuthorizationHandle.m */,
+			);
+			path = Authority;
+			sourceTree = "<group>";
+		};
+		F3AB8EEC20A4324700EA1F05 /* NaviView */ = {
+			isa = PBXGroup;
+			children = (
+				F3AB8EEE20A4324700EA1F05 /* QYLNaviView.h */,
+				F3AB8EED20A4324700EA1F05 /* QYLNaviView.m */,
+			);
+			path = NaviView;
+			sourceTree = "<group>";
+		};
+		F3AB8EFC20A44AD000EA1F05 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				F3AB8EF920A44ACC00EA1F05 /* QYLPhotoManager.h */,
+				F3AB8EFA20A44ACC00EA1F05 /* QYLPhotoManager.m */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		F3AB8EFD20A44C2800EA1F05 /* Commont */ = {
+			isa = PBXGroup;
+			children = (
+				F3AB8F0720A44C4600EA1F05 /* QYLMarco.h */,
+				F3AB8F0320A44C4100EA1F05 /* QYLCommonUtil.h */,
+				F3AB8EFF20A44C4100EA1F05 /* QYLCommonUtil.m */,
+				F3AB8F0220A44C4100EA1F05 /* QYLDefaultNumber.h */,
+				F3AB8EFE20A44C4100EA1F05 /* QYLDefaultNumber.m */,
+				F3AB8F0020A44C4100EA1F05 /* QYLToast.h */,
+				F3AB8F0120A44C4100EA1F05 /* QYLToast.m */,
+			);
+			path = Commont;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +276,7 @@
 		F3AB8EA520A42E4B00EA1F05 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = QYL;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Marshal;
 				TargetAttributes = {
@@ -235,9 +318,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3AB8EF820A432EC00EA1F05 /* QYLHomeController.xib in Resources */,
 				F3AB8EBD20A42E4E00EA1F05 /* LaunchScreen.storyboard in Resources */,
 				F3AB8EBA20A42E4E00EA1F05 /* Assets.xcassets in Resources */,
-				F3AB8EB820A42E4C00EA1F05 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,9 +345,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3AB8EB520A42E4C00EA1F05 /* ViewController.m in Sources */,
 				F3AB8EC020A42E4E00EA1F05 /* main.m in Sources */,
+				F3AB8F0620A44C4100EA1F05 /* QYLToast.m in Sources */,
+				F3AB8EFB20A44ACC00EA1F05 /* QYLPhotoManager.m in Sources */,
+				F3AB8EF720A432EC00EA1F05 /* QYLHomeController.m in Sources */,
+				F3AB8EF020A4324700EA1F05 /* QYLNaviView.m in Sources */,
+				F3AB8F0420A44C4100EA1F05 /* QYLDefaultNumber.m in Sources */,
+				F3AB8EEF20A4324700EA1F05 /* QYLAuthorizationHandle.m in Sources */,
 				F3AB8EB220A42E4C00EA1F05 /* AppDelegate.m in Sources */,
+				F3AB8F0520A44C4100EA1F05 /* QYLCommonUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,14 +389,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F3AB8EB620A42E4C00EA1F05 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F3AB8EB720A42E4C00EA1F05 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F3AB8EBB20A42E4E00EA1F05 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -434,7 +515,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 439K9F32X7;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PhotoClips/QYLPhotoClips.pch";
 				INFOPLIST_FILE = PhotoClips/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,7 +535,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 439K9F32X7;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PhotoClips/QYLPhotoClips.pch";
 				INFOPLIST_FILE = PhotoClips/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
