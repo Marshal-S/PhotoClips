@@ -12,5 +12,6 @@
 #import "QYLMarco.h"
 #import "QYLToast.h"
 #import "QYLDefaultNumber.h"
+#import "QYLNaviView.h"
 
 #endif /* QYLPhotoClips_pch */

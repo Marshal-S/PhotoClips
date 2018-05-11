@@ -1,38 +1,23 @@
 //
-//  QYLHomeController.m
+//  QYLPhotosSelectController.m
 //  PhotoClips
 //
-//  Created by Marshal on 2018/5/10.
+//  Created by Marshal on 2018/5/11.
 //  Copyright © 2018年 Marshal. All rights reserved.
 //
 
-#import "QYLHomeController.h"
 #import "QYLPhotosSelectController.h"
 
-@interface QYLHomeController ()
+@interface QYLPhotosSelectController ()
 
 @end
 
-@implementation QYLHomeController
+@implementation QYLPhotosSelectController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [QYLNaviView viewWithSuperView:self.view makeContents:^(QYLNaviView *make) {
-        [make setTitle:@"图片剪裁"];
-    }];
+    // Do any additional setup after loading the view.
 }
-
-- (IBAction)onClickToClipsImage:(UIButton *)sender {
-    if (sender.tag == 20) {
-    //1920
-        
-    }else {
-    //9:18
-        
-    }
-}
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

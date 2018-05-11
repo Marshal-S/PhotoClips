@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,8 +19,46 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wq-35-3AZ">
+                    <rect key="frame" x="20" y="213.5" width="335" height="60"/>
+                    <color key="backgroundColor" red="0.10980392160000001" green="0.6705882353" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="EMp-44-TZa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="1080 x 1920">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickToClipsImage:" destination="-1" eventType="touchUpInside" id="MQb-oW-JyC"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71N-Nz-eF1">
+                    <rect key="frame" x="20" y="413.5" width="335" height="60"/>
+                    <color key="backgroundColor" red="0.10980392160000001" green="0.6705882353" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="9 : 18">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickToClipsImage:" destination="-1" eventType="touchUpInside" id="gn4-Jj-s4M"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="0wq-35-3AZ" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="EIT-gE-A2M"/>
+                <constraint firstItem="0wq-35-3AZ" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="ZfM-hk-KR6"/>
+                <constraint firstItem="71N-Nz-eF1" firstAttribute="height" secondItem="0wq-35-3AZ" secondAttribute="height" id="dla-EZ-ooq"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="0wq-35-3AZ" secondAttribute="trailing" constant="20" id="jfR-Nm-zjs"/>
+                <constraint firstItem="71N-Nz-eF1" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="km0-H8-br9"/>
+                <constraint firstItem="71N-Nz-eF1" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" constant="100" id="pVQ-x5-L2p"/>
+                <constraint firstItem="0wq-35-3AZ" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" constant="-100" id="pdL-r3-yyX"/>
+                <constraint firstItem="71N-Nz-eF1" firstAttribute="width" secondItem="0wq-35-3AZ" secondAttribute="width" id="yDL-RH-gbF"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>
     </objects>
 </document>

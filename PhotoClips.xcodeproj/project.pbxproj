@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F36A514320A5391E0087C989 /* QYLPhotosSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514220A5391E0087C989 /* QYLPhotosSelectController.m */; };
+		F36A514620A539460087C989 /* QYLPhotosSelectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514520A539460087C989 /* QYLPhotosSelectModel.m */; };
+		F36A514920A539700087C989 /* QYLPhotosSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514820A539700087C989 /* QYLPhotosSelectCell.m */; };
 		F3AB8EB220A42E4C00EA1F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EB120A42E4C00EA1F05 /* AppDelegate.m */; };
 		F3AB8EBA20A42E4E00EA1F05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3AB8EB920A42E4E00EA1F05 /* Assets.xcassets */; };
 		F3AB8EBD20A42E4E00EA1F05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3AB8EBB20A42E4E00EA1F05 /* LaunchScreen.storyboard */; };
@@ -41,6 +44,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F36A514120A5391E0087C989 /* QYLPhotosSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotosSelectController.h; sourceTree = "<group>"; };
+		F36A514220A5391E0087C989 /* QYLPhotosSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotosSelectController.m; sourceTree = "<group>"; };
+		F36A514420A539460087C989 /* QYLPhotosSelectModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotosSelectModel.h; sourceTree = "<group>"; };
+		F36A514520A539460087C989 /* QYLPhotosSelectModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotosSelectModel.m; sourceTree = "<group>"; };
+		F36A514720A539700087C989 /* QYLPhotosSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotosSelectCell.h; sourceTree = "<group>"; };
+		F36A514820A539700087C989 /* QYLPhotosSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotosSelectCell.m; sourceTree = "<group>"; };
 		F3AB8EAD20A42E4C00EA1F05 /* PhotoClips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoClips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AB8EB020A42E4C00EA1F05 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F3AB8EB120A42E4C00EA1F05 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -196,6 +205,12 @@
 			children = (
 				F3AB8EF920A44ACC00EA1F05 /* QYLPhotoManager.h */,
 				F3AB8EFA20A44ACC00EA1F05 /* QYLPhotoManager.m */,
+				F36A514120A5391E0087C989 /* QYLPhotosSelectController.h */,
+				F36A514220A5391E0087C989 /* QYLPhotosSelectController.m */,
+				F36A514720A539700087C989 /* QYLPhotosSelectCell.h */,
+				F36A514820A539700087C989 /* QYLPhotosSelectCell.m */,
+				F36A514420A539460087C989 /* QYLPhotosSelectModel.h */,
+				F36A514520A539460087C989 /* QYLPhotosSelectModel.m */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -348,9 +363,12 @@
 				F3AB8EC020A42E4E00EA1F05 /* main.m in Sources */,
 				F3AB8F0620A44C4100EA1F05 /* QYLToast.m in Sources */,
 				F3AB8EFB20A44ACC00EA1F05 /* QYLPhotoManager.m in Sources */,
+				F36A514320A5391E0087C989 /* QYLPhotosSelectController.m in Sources */,
 				F3AB8EF720A432EC00EA1F05 /* QYLHomeController.m in Sources */,
 				F3AB8EF020A4324700EA1F05 /* QYLNaviView.m in Sources */,
 				F3AB8F0420A44C4100EA1F05 /* QYLDefaultNumber.m in Sources */,
+				F36A514920A539700087C989 /* QYLPhotosSelectCell.m in Sources */,
+				F36A514620A539460087C989 /* QYLPhotosSelectModel.m in Sources */,
 				F3AB8EEF20A4324700EA1F05 /* QYLAuthorizationHandle.m in Sources */,
 				F3AB8EB220A42E4C00EA1F05 /* AppDelegate.m in Sources */,
 				F3AB8F0520A44C4100EA1F05 /* QYLCommonUtil.m in Sources */,
