@@ -23,6 +23,7 @@ static NSString *kQYLAlbumIdentifier = @"kQYLAlbumIdentifier";
 - (instancetype)initWithFrame:(CGRect)frame albumList:(NSArray<QYLAblumModel *> *)albumList {
     if (self = [super initWithFrame:frame style:UITableViewStylePlain]) {
         _albumList = albumList;
+        [self setUp];
     }
     return self;
 }
@@ -32,7 +33,7 @@ static NSString *kQYLAlbumIdentifier = @"kQYLAlbumIdentifier";
     self.dataSource = self;
     self.delegate = self;
     self.backgroundColor = [UIColor whiteColor];
-    self.rowHeight = 60;
+    self.rowHeight = 80;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

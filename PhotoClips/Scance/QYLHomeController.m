@@ -17,19 +17,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [QYLNaviView viewWithSuperView:self.view makeContents:^(QYLNaviView *make) {
-        [make setTitle:@"图片剪裁"];
-    }];
+    self.navigationItem.title = @"图片剪裁";
 }
 
 - (IBAction)onClickToClipsImage:(UIButton *)sender {
+    QYLPhotoClipType type;
     if (sender.tag == 20) {
     //1920
-        
+        type = QYLPhotoClipType1080x1920;
     }else {
     //9:18
-        
+        type = QYLPhotoClipType9_18;
     }
+    QYLPhotosSelectController *select = [QYLPhotosSelectController selectWithClipType:type];
+    [self.navigationController pushViewController:select animated:YES];
 }
 
 

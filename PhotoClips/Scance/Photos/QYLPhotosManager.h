@@ -9,21 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
 
-//相册列表图片模型
-@interface QYLAblumModel : NSObject
-
-@property (nonatomic, copy) NSString *title;              //相册标题
-@property (nonatomic, assign) NSInteger count;            //相册内部图片熟练
-@property (nonatomic, strong) NSArray<PHAsset *> *assets; //内部图片数组(目前只存放三张，可以改数字),封面为第一张
-
-@end
-
 //某一相册内图片模型
 @interface QYLPhotoModel : NSObject
 
 @property (nonatomic, strong) PHAsset *asset;       //图片
 @property (nonatomic, assign) BOOL isUserLibrary;   //是否是本地图库图片
 @property (nonatomic, assign) BOOL isSelect;        //是否被选中了
+
+@end
+
+//相册列表图片模型
+@interface QYLAblumModel : NSObject
+
+@property (nonatomic, copy) NSString *title;              //相册标题
+@property (nonatomic, assign) NSInteger count;            //相册内部图片熟练
+@property (nonatomic, strong) NSArray<QYLPhotoModel *> *assets; //内部图片数组(目前只存放三张，可以改数字),封面为第一张
 
 @end
 
@@ -79,16 +79,18 @@
  @param asset 图片asset
  @param size 大小
  @param handler 获取图片成功后的回调
+ @return 返回图片请求id，可用于取消本次请求
  */
-- (void)getFastImageWithAsset:(PHAsset *)asset targetSize:(CGSize)size resultHandler:(void(^)(UIImage *image))handler;
+- (PHImageRequestID)getFastImageWithAsset:(PHAsset *)asset targetSize:(CGSize)size resultHandler:(void(^)(UIImage *image))handler;
 
 /**
  获取原图
 
  @param asset 图片asset
  @param handler 获取原图成功后的回调
+ @return 返回图片请求id，可用于取消本次请求
  */
-- (void)getExactImageWithAsset:(PHAsset *)asset resultHandler:(void(^)(UIImage *image))handler;
+- (PHImageRequestID)getExactImageWithAsset:(PHAsset *)asset resultHandler:(void(^)(UIImage *image))handler;
 
 /**
  保存图片到相册

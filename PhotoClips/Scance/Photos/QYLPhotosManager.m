@@ -25,9 +25,10 @@
     NSMutableArray *albums = [NSMutableArray array];
     PHFetchResult *smartAblums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
     [smartAblums enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [albums addObject:createAblumModel(obj)];
+        QYLAblumModel *albumModel = createAblumModel(obj);
+        if (albumModel) [albums addObject:albumModel];
     }];
-    return nil;
+    return albums;
 }
 
 //获取所有用户创建过的相册
@@ -35,16 +36,18 @@
     NSMutableArray *albums = [NSMutableArray array];
     PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
     [userAlbums enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [albums addObject:createAblumModel(obj)];
+        QYLAblumModel *albumModel = createAblumModel(obj);
+        if (albumModel) [albums addObject:albumModel];
     }];
-    return nil;
+    return albums;
 }
 
 QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
+    NSArray *assets = [[QYLPhotosManager sharedInstance] getAssetsInAssetCollection:assetCollection count:3 ascending:NO];
+    if (assets.count < 1) return nil;
     QYLAblumModel *album = [QYLAblumModel new];
     album.title = assetCollection.localizedTitle;
     album.count = assetCollection.estimatedAssetCount;
-    NSArray *assets = [[QYLPhotosManager sharedInstance] getAssetsInAssetCollection:assetCollection count:3 ascending:NO];
     album.assets = assets;
     return album;
 }
@@ -55,8 +58,9 @@ QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
     PHFetchOptions *option = [PHFetchOptions new];
     option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:ascending]];
     PHFetchResult *result = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:option];
-    [result enumerateObjectsUsingBlock:^(PHAsset * _Nonnull asset, NSUInteger idx, BOOL * _Nonnull stop) {
-        [assets addObject:createPhotoModel(asset)];
+    [result enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        QYLPhotoModel *photoModel = createPhotoModel(obj);
+        if (photoModel) [assets addObject:photoModel];
     }];
     return assets;
 }
@@ -67,8 +71,9 @@ QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
     PHFetchOptions *option = [PHFetchOptions new];
     option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:ascending]];
     PHFetchResult *result = [PHAsset fetchAssetsInAssetCollection:assetCollection options:option];
-    [result enumerateObjectsUsingBlock:^(PHAsset * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [assets addObject:createPhotoModel(obj)];
+    [result enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        QYLPhotoModel *photoModel = createPhotoModel(obj);
+        if (photoModel) [assets addObject:photoModel];
     }];
     return assets;
 }
@@ -79,8 +84,9 @@ QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
     PHFetchOptions *option = [PHFetchOptions new];
     option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:ascending]];
     PHFetchResult *result = [PHAsset fetchAssetsInAssetCollection:assetCollection options:option];
-    [result enumerateObjectsUsingBlock:^(PHAsset * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [assets addObject:createPhotoModel(obj)];
+    [result enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        QYLPhotoModel *photoModel = createPhotoModel(obj);
+        if (photoModel) [assets addObject:photoModel];
         if (idx >= count) *stop = YES;
     }];
     return assets;
@@ -96,24 +102,25 @@ QYLPhotoModel *createPhotoModel(PHAsset *asset) {
 }
 
 //获取快速图片，用于获取图片列表
-- (void)getFastImageWithAsset:(PHAsset *)asset targetSize:(CGSize)size resultHandler:(void(^)(UIImage *image))handler {
-    requestByAsset(asset, PHImageRequestOptionsResizeModeFast, size, handler);
+- (PHImageRequestID)getFastImageWithAsset:(PHAsset *)asset targetSize:(CGSize)size resultHandler:(void(^)(UIImage *image))handler {
+    return requestByAsset(asset, PHImageRequestOptionsResizeModeFast, size, handler);
 }
 
 //获取精确图片
-- (void)getExactImageWithAsset:(PHAsset *)asset resultHandler:(void(^)(UIImage *image))handler {
-    requestByAsset(asset, PHImageRequestOptionsResizeModeExact, PHImageManagerMaximumSize, handler);
+- (PHImageRequestID)getExactImageWithAsset:(PHAsset *)asset resultHandler:(void(^)(UIImage *image))handler {
+    return requestByAsset(asset, PHImageRequestOptionsResizeModeExact, PHImageManagerMaximumSize, handler);
 }
 
 //获取图片
-void requestByAsset(PHAsset *asset, PHImageRequestOptionsResizeMode resizeMode, CGSize size, void(^handler)(UIImage *image)) {
+PHImageRequestID requestByAsset(PHAsset *asset, PHImageRequestOptionsResizeMode resizeMode, CGSize size, void(^handler)(UIImage *image)) {
     PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
     option.resizeMode = resizeMode;
     option.networkAccessAllowed = YES;//是否允许从网络上下载，一部分图片不在本地，可能存放到iCloud里面了
-    [[PHCachingImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    PHImageRequestID imageID = [[PHCachingImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         //回到主线程
         handler(result);
     }];
+    return imageID;
 }
 
 - (void)savePhotoToAlbum:(UIImage *)image {

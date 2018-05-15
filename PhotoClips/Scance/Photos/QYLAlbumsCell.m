@@ -10,6 +10,9 @@
 #import "QYLPhotosManager.h"
 
 @interface QYLAlbumsCell ()
+{
+    PHImageRequestID _irID;
+}
 
 @property (nonatomic, strong) UIImageView *ivCover;
 @property (nonatomic, strong) UILabel *lblTitle;
@@ -29,6 +32,7 @@
 - (void)setUp {
     _ivCover = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
     _ivCover.contentMode = UIViewContentModeScaleAspectFit;
+    _ivCover.clipsToBounds = YES;
     [self.contentView addSubview:_ivCover];
     
     _lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(_ivCover.s_right+10, _ivCover.s_Y, 200, 30)];
@@ -43,13 +47,14 @@
     _lblCount.backgroundColor = [UIColor whiteColor];
     _lblCount.font = [UIFont systemFontOfSize:14];
     _lblCount.textAlignment = NSTextAlignmentLeft;
-    [self.contentView addSubview:_lblTitle];
+    [self.contentView addSubview:_lblCount];
 }
 
 - (void)updateWithAblumModel:(QYLAblumModel *)albumModel {
-    id coverAsset = albumModel.assets[0];
-    if (coverAsset) {
-        [[QYLPhotosManager sharedInstance] getFastImageWithAsset:coverAsset targetSize:CGSizeMake(120, 120) resultHandler:^(UIImage *image) {
+    QYLPhotoModel *coverPhoto = albumModel.assets[0];
+    if (coverPhoto) {
+        if (_irID) [[PHImageManager defaultManager] cancelImageRequest:_irID];//取消本次请求
+        _irID = [[QYLPhotosManager sharedInstance] getFastImageWithAsset:coverPhoto.asset targetSize:CGSizeMake(120, 120) resultHandler:^(UIImage *image) {
             self.ivCover.image = image;
         }];
     }
