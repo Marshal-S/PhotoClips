@@ -13,5 +13,6 @@
 #import "QYLToast.h"
 #import "QYLDefaultNumber.h"
 #import "QYLNaviView.h"
+#import "UIView+S_Extend.h"
 
 #endif /* QYLPhotoClips_pch */

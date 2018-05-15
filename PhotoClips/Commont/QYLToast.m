@@ -11,7 +11,7 @@
 @implementation QYLToast
 
 + (void)showWithMessage:(NSString *)message {
-    [self showWithMessage:message timeInterval:2];
+    [self showWithMessage:message timeInterval:1.5];
 }
 
 + (void)showWithMessage:(NSString *)message timeInterval:(CGFloat)interval {
