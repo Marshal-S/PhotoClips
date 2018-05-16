@@ -29,7 +29,7 @@ static NSString *kQYLAlbumIdentifier = @"kQYLAlbumIdentifier";
 }
 
 - (void)setUp {
-    self.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
+    self.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);//左右控制好，内部是可以拖动的
     [self registerClass:NSClassFromString(@"QYLAlbumsCell") forCellReuseIdentifier:kQYLAlbumIdentifier];
     self.dataSource = self;
     self.delegate = self;

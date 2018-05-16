@@ -9,7 +9,7 @@
 #import "QYLPhotosView.h"
 #import "QYLPhotosCell.h"
 
-static NSInteger lineWidth = 15;
+static NSInteger lineWidth = 10;
 static NSString *kQYLPhotosIdentifier = @"kQYLPhotosIdentifier";
 
 @interface QYLPhotosView ()<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate>
@@ -35,14 +35,14 @@ static NSString *kQYLPhotosIdentifier = @"kQYLPhotosIdentifier";
 }
 
 - (void)setUp {
-    self.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
+    self.contentInset = UIEdgeInsetsMake(10, 10, 10, 10);
     [self registerClass:NSClassFromString(@"QYLPhotosCell") forCellWithReuseIdentifier:kQYLPhotosIdentifier];
     self.dataSource = self;
     self.delegate = self;
     self.backgroundColor = [UIColor whiteColor];
     
     NSInteger column = 3; //列数
-    CGFloat width = (self.frame.size.width - lineWidth*(column-1))/column;
+    CGFloat width = (self.frame.size.width - lineWidth*(column+1))/column;
     _size = CGSizeMake(width, width);
 }
 
@@ -52,7 +52,12 @@ static NSString *kQYLPhotosIdentifier = @"kQYLPhotosIdentifier";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     QYLPhotosCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQYLPhotosIdentifier forIndexPath:indexPath];
-    [cell updateWithPhotoModel:_photoList[indexPath.row]];
+    QYLPhotoModel *photoModel = _photoList[indexPath.row];
+    [cell updateWithPhotoModel:photoModel];
+    Weakify(self);
+    [cell setSelectBlock:^(BOOL selected) {
+        return wself.onClickToSelectBlock(photoModel, selected);
+    }];
     return cell;
 }
 

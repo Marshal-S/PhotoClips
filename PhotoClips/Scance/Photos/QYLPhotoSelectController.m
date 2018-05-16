@@ -16,6 +16,7 @@
 }
 
 @property (nonatomic, strong) QYLPhotosView *photosView;
+@property (nonatomic, strong) NSMutableArray *selectList;
 
 @end
 
@@ -31,18 +32,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"图片选择";
     [self initPhotoView];
 }
 
 - (void)initPhotoView {
+    _selectList = [NSMutableArray array];//初始化选中数组
+    
     NSArray<QYLPhotoModel *> *photoList = [[QYLPhotosManager sharedInstance] getAssetsInAssetCollection:_assetCollection ascending:NO];
-    _photosView = [[QYLPhotosView alloc] initWithFrame:CGRectMake(10, topHeight, SCREEN_WIDTH-20, SCREEN_HEIGHT-topHeight) photoList:photoList];
+    _photosView = [[QYLPhotosView alloc] initWithFrame:CGRectMake(0, topHeight, SCREEN_WIDTH, SCREEN_HEIGHT-topHeight) photoList:photoList];
     if (@available(iOS 11.0, *)) {
         _photosView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     Weakify(self);
+    [_photosView setOnClickToSelectBlock:^(QYLPhotoModel *photoModel, BOOL selected) {
+        if (selected) {
+            if (wself.selectList.count > 10) {
+                [QYLToast showWithMessage:@"最多选取10个!"];
+                return NO;
+            }
+            [wself.selectList addObject:photoModel];
+        }else {
+            [wself.selectList removeObject:photoModel];
+        }
+        return YES;
+    }];
     [_photosView setOnClickToCheckLargeBlock:^(NSInteger row) {
         QYLLargeImageController *large = [[QYLLargeImageController alloc] initWithAsset:photoList[row].asset];
         [wself presentViewController:large animated:YES completion:nil];

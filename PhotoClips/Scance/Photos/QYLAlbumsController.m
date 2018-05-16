@@ -31,12 +31,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"相册";
     [self initAlbumsView];
 }
 
 - (void)initAlbumsView {
     NSArray<QYLAblumModel *> *albums = [[QYLPhotosManager sharedInstance] getAllSmartAlbums];
-    _albumsView = [[QYLAlbumsView alloc] initWithFrame:CGRectMake(10, topHeight, SCREEN_WIDTH-20, SCREEN_HEIGHT-topHeight) albumList:albums];
+    _albumsView = [[QYLAlbumsView alloc] initWithFrame:CGRectMake(0, topHeight, SCREEN_WIDTH, SCREEN_HEIGHT-topHeight) albumList:albums];
     if (@available(iOS 11.0, *)) {
         _albumsView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {

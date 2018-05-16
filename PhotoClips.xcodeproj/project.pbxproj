@@ -30,6 +30,8 @@
 		F3AB8F0620A44C4100EA1F05 /* QYLToast.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8F0120A44C4100EA1F05 /* QYLToast.m */; };
 		F3D57C6C20ABCDFD0083BA03 /* QYLPhotoSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D57C6B20ABCDFD0083BA03 /* QYLPhotoSelectController.m */; };
 		F3D57C6F20ABDE0C0083BA03 /* QYLLargeImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D57C6E20ABDE0C0083BA03 /* QYLLargeImageController.m */; };
+		F3D57C7420AC1FA90083BA03 /* QYLClipsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D57C7220AC1FA90083BA03 /* QYLClipsController.m */; };
+		F3D57C7520AC1FA90083BA03 /* QYLClipsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3D57C7320AC1FA90083BA03 /* QYLClipsController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +100,10 @@
 		F3D57C6B20ABCDFD0083BA03 /* QYLPhotoSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotoSelectController.m; sourceTree = "<group>"; };
 		F3D57C6D20ABDE0C0083BA03 /* QYLLargeImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLLargeImageController.h; sourceTree = "<group>"; };
 		F3D57C6E20ABDE0C0083BA03 /* QYLLargeImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLLargeImageController.m; sourceTree = "<group>"; };
+		F3D57C7120AC1FA90083BA03 /* QYLClipsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLClipsController.h; sourceTree = "<group>"; };
+		F3D57C7220AC1FA90083BA03 /* QYLClipsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLClipsController.m; sourceTree = "<group>"; };
+		F3D57C7320AC1FA90083BA03 /* QYLClipsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QYLClipsController.xib; sourceTree = "<group>"; };
+		F3D57C7620AC34250083BA03 /* QYLPhotoEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotoEnum.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				F3AB8EFC20A44AD000EA1F05 /* Photos */,
+				F3D57C7020AC1E510083BA03 /* Clips */,
 				F3AB8EF420A432EC00EA1F05 /* QYLHomeController.h */,
 				F3AB8EF520A432EC00EA1F05 /* QYLHomeController.m */,
 				F3AB8EF620A432EC00EA1F05 /* QYLHomeController.xib */,
@@ -224,6 +231,7 @@
 			children = (
 				F36A514A20A586400087C989 /* QYLPhotosManager.h */,
 				F36A514B20A586400087C989 /* QYLPhotosManager.m */,
+				F3D57C7620AC34250083BA03 /* QYLPhotoEnum.h */,
 				F36A514120A5391E0087C989 /* QYLAlbumsController.h */,
 				F36A514220A5391E0087C989 /* QYLAlbumsController.m */,
 				F3075FA220A6DCAF00AB78BF /* QYLAlbumsView.h */,
@@ -257,6 +265,16 @@
 				F3AB8F0120A44C4100EA1F05 /* QYLToast.m */,
 			);
 			path = Commont;
+			sourceTree = "<group>";
+		};
+		F3D57C7020AC1E510083BA03 /* Clips */ = {
+			isa = PBXGroup;
+			children = (
+				F3D57C7120AC1FA90083BA03 /* QYLClipsController.h */,
+				F3D57C7220AC1FA90083BA03 /* QYLClipsController.m */,
+				F3D57C7320AC1FA90083BA03 /* QYLClipsController.xib */,
+			);
+			path = Clips;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3D57C7520AC1FA90083BA03 /* QYLClipsController.xib in Resources */,
 				F3AB8EF820A432EC00EA1F05 /* QYLHomeController.xib in Resources */,
 				F3AB8EBD20A42E4E00EA1F05 /* LaunchScreen.storyboard in Resources */,
 				F3AB8EBA20A42E4E00EA1F05 /* Assets.xcassets in Resources */,
@@ -407,6 +426,7 @@
 				F3AB8EB220A42E4C00EA1F05 /* AppDelegate.m in Sources */,
 				F3AB8F0520A44C4100EA1F05 /* QYLCommonUtil.m in Sources */,
 				F3075FAA20A6DCF800AB78BF /* QYLPhotosView.m in Sources */,
+				F3D57C7420AC1FA90083BA03 /* QYLClipsController.m in Sources */,
 				F3075FA420A6DCAF00AB78BF /* QYLAlbumsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

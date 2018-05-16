@@ -12,7 +12,7 @@
 
 @interface QYLPhotosCell : UICollectionViewCell
 
-@property (nonatomic, copy) void(^selectBlock)(BOOL selected);
+@property (nonatomic, copy) BOOL (^selectBlock)(BOOL selected);//返回值表示可不可以选择
 
 - (void)updateWithPhotoModel:(QYLPhotoModel *)photoModel;
 

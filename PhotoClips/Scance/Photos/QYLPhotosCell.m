@@ -12,6 +12,7 @@
 @interface QYLPhotosCell ()
 {
     PHImageRequestID _irID;
+    QYLPhotoModel *_photoModel;
 }
 
 @property (nonatomic, strong) UIImageView *ivPreview; //预览图
@@ -45,15 +46,18 @@
 }
 
 - (void)updateWithPhotoModel:(QYLPhotoModel *)photoModel {
+    _btnSelect.selected = photoModel.isSelect;
     [[PHImageManager defaultManager] cancelImageRequest:_irID];
     _irID = [[QYLPhotosManager sharedInstance] getFastImageWithAsset:photoModel.asset targetSize:CGSizeMake(240, 240) resultHandler:^(UIImage *image) {
         self.ivPreview.image = image;
     }];
+    _photoModel = photoModel;
 }
 
 - (void)onClickToSelect:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    if (_selectBlock) _selectBlock(sender.selected);
+    BOOL selected = !sender.selected;
+    if (!_selectBlock(selected)) return;
+    _photoModel.isSelect = sender.selected = selected;
 }
 
 
