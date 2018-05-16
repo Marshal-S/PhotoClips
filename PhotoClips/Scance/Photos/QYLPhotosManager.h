@@ -21,9 +21,10 @@
 //相册列表图片模型
 @interface QYLAblumModel : NSObject
 
-@property (nonatomic, copy) NSString *title;              //相册标题
-@property (nonatomic, assign) NSInteger count;            //相册内部图片熟练
-@property (nonatomic, strong) NSArray<QYLPhotoModel *> *assets; //内部图片数组(目前只存放三张，可以改数字),封面为第一张
+@property (nonatomic, copy) NSString *title;                     //相册标题
+@property (nonatomic, assign) NSInteger count;                   //相册内部图片熟练
+@property (nonatomic, strong) PHAssetCollection *assetCollection;//对应相册
+@property (nonatomic, strong) NSArray<QYLPhotoModel *> *assets;  //内部图片数组(目前只存放三张，可以改数字),封面为第一张
 
 @end
 
@@ -64,18 +65,8 @@
 - (NSArray<QYLPhotoModel *> *)getAssetsInAssetCollection:(PHAssetCollection *)assetCollection ascending:(BOOL)ascending;
 
 /**
- 根据指定相册获取其内部指定数量相片
-
- @param assetCollection 指定相册
- @param count 指定数量
- @param ascending YES表示升序，NO表示降序
- @return 指定相册指定张数的图片集合
- */
-- (NSArray<QYLPhotoModel *> *)getAssetsInAssetCollection:(PHAssetCollection *)assetCollection count:(NSInteger)count ascending:(BOOL)ascending;
-
-/**
  快速获取低画质图片(适用于列表)
-
+ 如果在tableView等复用视图上注意调用这个方法[[PHImageManager defaultManager] cancelImageRequest:_irID];
  @param asset 图片asset
  @param size 大小
  @param handler 获取图片成功后的回调

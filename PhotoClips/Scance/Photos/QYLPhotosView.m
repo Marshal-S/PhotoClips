@@ -35,6 +35,7 @@ static NSString *kQYLPhotosIdentifier = @"kQYLPhotosIdentifier";
 }
 
 - (void)setUp {
+    self.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
     [self registerClass:NSClassFromString(@"QYLPhotosCell") forCellWithReuseIdentifier:kQYLPhotosIdentifier];
     self.dataSource = self;
     self.delegate = self;
@@ -51,14 +52,18 @@ static NSString *kQYLPhotosIdentifier = @"kQYLPhotosIdentifier";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     QYLPhotosCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQYLPhotosIdentifier forIndexPath:indexPath];
-    
+    [cell updateWithPhotoModel:_photoList[indexPath.row]];
     return cell;
 }
 
-- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return _size;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    if (_onClickToCheckLargeBlock) _onClickToCheckLargeBlock(indexPath.row);
+}
 
 
 

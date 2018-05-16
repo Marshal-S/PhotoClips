@@ -43,12 +43,18 @@
 }
 
 QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
-    NSArray *assets = [[QYLPhotosManager sharedInstance] getAssetsInAssetCollection:assetCollection count:3 ascending:NO];
+    NSArray *assets = [[QYLPhotosManager sharedInstance] getAssetsInAssetCollection:assetCollection ascending:NO];
+    NSMutableArray *coverAssets = [NSMutableArray array];//用于获取封面,默认3张
+    [assets enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [coverAssets addObject:obj];
+        if (idx >= 2) *stop = YES;
+    }];
     if (assets.count < 1) return nil;
     QYLAblumModel *album = [QYLAblumModel new];
     album.title = assetCollection.localizedTitle;
-    album.count = assetCollection.estimatedAssetCount;
-    album.assets = assets;
+    album.assets = coverAssets;
+    album.assetCollection = assetCollection;
+    album.count = assets.count;
     return album;
 }
 
@@ -78,20 +84,6 @@ QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
     return assets;
 }
 
-//获取指定相册下的图片,指定张数,ascending YES为升序
-- (NSArray<QYLPhotoModel *> *)getAssetsInAssetCollection:(PHAssetCollection *)assetCollection count:(NSInteger)count ascending:(BOOL)ascending {
-    NSMutableArray *assets = [NSMutableArray array];
-    PHFetchOptions *option = [PHFetchOptions new];
-    option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:ascending]];
-    PHFetchResult *result = [PHAsset fetchAssetsInAssetCollection:assetCollection options:option];
-    [result enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        QYLPhotoModel *photoModel = createPhotoModel(obj);
-        if (photoModel) [assets addObject:photoModel];
-        if (idx >= count) *stop = YES;
-    }];
-    return assets;
-}
-
 //根据asset生成单张图片的model
 QYLPhotoModel *createPhotoModel(PHAsset *asset) {
     if (asset.mediaType != PHAssetMediaTypeImage) return nil;//不是图片的直接过滤掉
@@ -101,6 +93,7 @@ QYLPhotoModel *createPhotoModel(PHAsset *asset) {
     return photo;
 }
 
+//如果在tableView等复用视图上注意调用这个方法[[PHImageManager defaultManager] cancelImageRequest:_irID];
 //获取快速图片，用于获取图片列表
 - (PHImageRequestID)getFastImageWithAsset:(PHAsset *)asset targetSize:(CGSize)size resultHandler:(void(^)(UIImage *image))handler {
     return requestByAsset(asset, PHImageRequestOptionsResizeModeFast, size, handler);

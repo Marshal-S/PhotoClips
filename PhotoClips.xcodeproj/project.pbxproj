@@ -12,7 +12,7 @@
 		F3075FAA20A6DCF800AB78BF /* QYLPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3075FA920A6DCF800AB78BF /* QYLPhotosView.m */; };
 		F3075FB020A6F13200AB78BF /* UIView+S_Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = F3075FAD20A6F13100AB78BF /* UIView+S_Extend.m */; };
 		F3075FB120A6F13200AB78BF /* UIImage+S_QYLImageExtersion.m in Sources */ = {isa = PBXBuildFile; fileRef = F3075FAE20A6F13100AB78BF /* UIImage+S_QYLImageExtersion.m */; };
-		F36A514320A5391E0087C989 /* QYLPhotosSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514220A5391E0087C989 /* QYLPhotosSelectController.m */; };
+		F36A514320A5391E0087C989 /* QYLAlbumsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514220A5391E0087C989 /* QYLAlbumsController.m */; };
 		F36A514920A539700087C989 /* QYLPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514820A539700087C989 /* QYLPhotosCell.m */; };
 		F36A514C20A586400087C989 /* QYLPhotosManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514B20A586400087C989 /* QYLPhotosManager.m */; };
 		F3AB8EB220A42E4C00EA1F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EB120A42E4C00EA1F05 /* AppDelegate.m */; };
@@ -28,6 +28,8 @@
 		F3AB8F0420A44C4100EA1F05 /* QYLDefaultNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EFE20A44C4100EA1F05 /* QYLDefaultNumber.m */; };
 		F3AB8F0520A44C4100EA1F05 /* QYLCommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EFF20A44C4100EA1F05 /* QYLCommonUtil.m */; };
 		F3AB8F0620A44C4100EA1F05 /* QYLToast.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8F0120A44C4100EA1F05 /* QYLToast.m */; };
+		F3D57C6C20ABCDFD0083BA03 /* QYLPhotoSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D57C6B20ABCDFD0083BA03 /* QYLPhotoSelectController.m */; };
+		F3D57C6F20ABDE0C0083BA03 /* QYLLargeImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D57C6E20ABDE0C0083BA03 /* QYLLargeImageController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +60,8 @@
 		F3075FAD20A6F13100AB78BF /* UIView+S_Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+S_Extend.m"; sourceTree = "<group>"; };
 		F3075FAE20A6F13100AB78BF /* UIImage+S_QYLImageExtersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+S_QYLImageExtersion.m"; sourceTree = "<group>"; };
 		F3075FAF20A6F13200AB78BF /* UIImage+S_QYLImageExtersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+S_QYLImageExtersion.h"; sourceTree = "<group>"; };
-		F36A514120A5391E0087C989 /* QYLPhotosSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotosSelectController.h; sourceTree = "<group>"; };
-		F36A514220A5391E0087C989 /* QYLPhotosSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotosSelectController.m; sourceTree = "<group>"; };
+		F36A514120A5391E0087C989 /* QYLAlbumsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLAlbumsController.h; sourceTree = "<group>"; };
+		F36A514220A5391E0087C989 /* QYLAlbumsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLAlbumsController.m; sourceTree = "<group>"; };
 		F36A514720A539700087C989 /* QYLPhotosCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotosCell.h; sourceTree = "<group>"; };
 		F36A514820A539700087C989 /* QYLPhotosCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotosCell.m; sourceTree = "<group>"; };
 		F36A514A20A586400087C989 /* QYLPhotosManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotosManager.h; sourceTree = "<group>"; };
@@ -92,6 +94,10 @@
 		F3AB8F0320A44C4100EA1F05 /* QYLCommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYLCommonUtil.h; sourceTree = "<group>"; };
 		F3AB8F0720A44C4600EA1F05 /* QYLMarco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLMarco.h; sourceTree = "<group>"; };
 		F3AB8F0820A44C7F00EA1F05 /* QYLPhotoClips.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotoClips.pch; sourceTree = "<group>"; };
+		F3D57C6A20ABCDFD0083BA03 /* QYLPhotoSelectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotoSelectController.h; sourceTree = "<group>"; };
+		F3D57C6B20ABCDFD0083BA03 /* QYLPhotoSelectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotoSelectController.m; sourceTree = "<group>"; };
+		F3D57C6D20ABDE0C0083BA03 /* QYLLargeImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLLargeImageController.h; sourceTree = "<group>"; };
+		F3D57C6E20ABDE0C0083BA03 /* QYLLargeImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLLargeImageController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,18 +222,22 @@
 		F3AB8EFC20A44AD000EA1F05 /* Photos */ = {
 			isa = PBXGroup;
 			children = (
-				F36A514120A5391E0087C989 /* QYLPhotosSelectController.h */,
-				F36A514220A5391E0087C989 /* QYLPhotosSelectController.m */,
+				F36A514A20A586400087C989 /* QYLPhotosManager.h */,
+				F36A514B20A586400087C989 /* QYLPhotosManager.m */,
+				F36A514120A5391E0087C989 /* QYLAlbumsController.h */,
+				F36A514220A5391E0087C989 /* QYLAlbumsController.m */,
 				F3075FA220A6DCAF00AB78BF /* QYLAlbumsView.h */,
 				F3075FA320A6DCAF00AB78BF /* QYLAlbumsView.m */,
 				F3075FA520A6DCC600AB78BF /* QYLAlbumsCell.h */,
 				F3075FA620A6DCC600AB78BF /* QYLAlbumsCell.m */,
+				F3D57C6A20ABCDFD0083BA03 /* QYLPhotoSelectController.h */,
+				F3D57C6B20ABCDFD0083BA03 /* QYLPhotoSelectController.m */,
 				F3075FA820A6DCF800AB78BF /* QYLPhotosView.h */,
 				F3075FA920A6DCF800AB78BF /* QYLPhotosView.m */,
 				F36A514720A539700087C989 /* QYLPhotosCell.h */,
 				F36A514820A539700087C989 /* QYLPhotosCell.m */,
-				F36A514A20A586400087C989 /* QYLPhotosManager.h */,
-				F36A514B20A586400087C989 /* QYLPhotosManager.m */,
+				F3D57C6D20ABDE0C0083BA03 /* QYLLargeImageController.h */,
+				F3D57C6E20ABDE0C0083BA03 /* QYLLargeImageController.m */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -382,9 +392,11 @@
 			files = (
 				F3075FB120A6F13200AB78BF /* UIImage+S_QYLImageExtersion.m in Sources */,
 				F3AB8EC020A42E4E00EA1F05 /* main.m in Sources */,
+				F3D57C6F20ABDE0C0083BA03 /* QYLLargeImageController.m in Sources */,
+				F3D57C6C20ABCDFD0083BA03 /* QYLPhotoSelectController.m in Sources */,
 				F3075FA720A6DCC600AB78BF /* QYLAlbumsCell.m in Sources */,
 				F3AB8F0620A44C4100EA1F05 /* QYLToast.m in Sources */,
-				F36A514320A5391E0087C989 /* QYLPhotosSelectController.m in Sources */,
+				F36A514320A5391E0087C989 /* QYLAlbumsController.m in Sources */,
 				F36A514C20A586400087C989 /* QYLPhotosManager.m in Sources */,
 				F3AB8EF720A432EC00EA1F05 /* QYLHomeController.m in Sources */,
 				F3075FB020A6F13200AB78BF /* UIView+S_Extend.m in Sources */,

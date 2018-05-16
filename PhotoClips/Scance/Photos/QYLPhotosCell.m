@@ -10,6 +10,9 @@
 #import "QYLPhotosManager.h"
 
 @interface QYLPhotosCell ()
+{
+    PHImageRequestID _irID;
+}
 
 @property (nonatomic, strong) UIImageView *ivPreview; //预览图
 @property (nonatomic, strong) UIButton *btnSelect;
@@ -28,20 +31,22 @@
 
 - (void)setUp {
     _ivPreview = [[UIImageView alloc] initWithFrame:self.bounds];
-    _ivPreview.contentMode = UIViewContentModeCenter;
+    _ivPreview.contentMode = UIViewContentModeScaleAspectFill;
+    _ivPreview.clipsToBounds = YES;
     [self.contentView addSubview:_ivPreview];
     
-    _btnSelect = [[UIButton alloc] initWithFrame:CGRectMake(_ivPreview.s_right-40, 40, 40, 40)];
+    _btnSelect = [[UIButton alloc] initWithFrame:CGRectMake(_ivPreview.s_right-60, 0, 60, 60)];
     _btnSelect.contentMode = UIViewContentModeScaleAspectFit;
-    [_btnSelect setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [_btnSelect setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+    _btnSelect.imageEdgeInsets = UIEdgeInsetsMake(-20, 0, 0, -20);//图片向上偏移，但是大小足够摁住
+    [_btnSelect setImage:[UIImage imageNamed:@"checkbox_n"] forState:UIControlStateNormal];
+    [_btnSelect setImage:[UIImage imageNamed:@"checkbox_s"] forState:UIControlStateSelected];
     [_btnSelect addTarget:self action:@selector(onClickToSelect:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_btnSelect];
 }
 
 - (void)updateWithPhotoModel:(QYLPhotoModel *)photoModel {
-    id asset = photoModel.asset;
-    [[QYLPhotosManager sharedInstance] getFastImageWithAsset:asset targetSize:CGSizeMake(120, 120) resultHandler:^(UIImage *image) {
+    [[PHImageManager defaultManager] cancelImageRequest:_irID];
+    _irID = [[QYLPhotosManager sharedInstance] getFastImageWithAsset:photoModel.asset targetSize:CGSizeMake(240, 240) resultHandler:^(UIImage *image) {
         self.ivPreview.image = image;
     }];
 }

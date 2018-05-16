@@ -12,6 +12,8 @@
 
 @interface QYLPhotosView : UICollectionView
 
+@property (nonatomic, copy) void(^onClickToCheckLargeBlock)(NSInteger row);
+
 - (instancetype)initWithFrame:(CGRect)frame photoList:(NSArray<QYLPhotoModel *> *)photoList;
 
 @end

@@ -31,18 +31,18 @@
 
 - (void)setUp {
     _ivCover = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
-    _ivCover.contentMode = UIViewContentModeScaleAspectFit;
+    _ivCover.contentMode = UIViewContentModeScaleAspectFill;
     _ivCover.clipsToBounds = YES;
     [self.contentView addSubview:_ivCover];
     
-    _lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(_ivCover.s_right+10, _ivCover.s_Y, 200, 30)];
+    _lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(_ivCover.s_right+10, _ivCover.s_Y+10, 200, 20)];
     _lblTitle.textColor = [UIColor blackColor];
     _lblTitle.backgroundColor = [UIColor whiteColor];
-    _lblTitle.font = [UIFont systemFontOfSize:16];
+    _lblTitle.font = [UIFont systemFontOfSize:17];
     _lblTitle.textAlignment = NSTextAlignmentLeft;
     [self.contentView addSubview:_lblTitle];
     
-    _lblCount = [[UILabel alloc] initWithFrame:CGRectMake(_lblTitle.s_X, _lblTitle.s_bottom+5, 200, 30)];
+    _lblCount = [[UILabel alloc] initWithFrame:CGRectMake(_lblTitle.s_X+2, _lblTitle.s_bottom, 200, 20)];
     _lblCount.textColor = [UIColor grayColor];
     _lblCount.backgroundColor = [UIColor whiteColor];
     _lblCount.font = [UIFont systemFontOfSize:14];

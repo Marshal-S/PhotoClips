@@ -13,8 +13,8 @@ typedef NS_ENUM(NSUInteger, QYLPhotoClipType) {
     QYLPhotoClipType9_18,     //9:18
 };
 
-@interface QYLPhotosSelectController : UIViewController
+@interface QYLAlbumsController : UIViewController
 
-+ (instancetype)selectWithClipType:(QYLPhotoClipType)clipType;
++ (instancetype)clipWithType:(QYLPhotoClipType)clipType;
 
 @end

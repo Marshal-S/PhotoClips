@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-    topHeight = statusBarHeight + 20;
+    topHeight = statusBarHeight + 44;
     IS_IPHONEX = statusBarHeight != 20;
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

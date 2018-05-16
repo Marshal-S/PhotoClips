@@ -29,11 +29,13 @@ static NSString *kQYLAlbumIdentifier = @"kQYLAlbumIdentifier";
 }
 
 - (void)setUp {
+    self.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
     [self registerClass:NSClassFromString(@"QYLAlbumsCell") forCellReuseIdentifier:kQYLAlbumIdentifier];
     self.dataSource = self;
     self.delegate = self;
     self.backgroundColor = [UIColor whiteColor];
     self.rowHeight = 80;
+    self.tableFooterView = [UIView new];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

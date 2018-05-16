@@ -7,7 +7,7 @@
 //
 
 #import "QYLHomeController.h"
-#import "QYLPhotosSelectController.h"
+#import "QYLAlbumsController.h"
 
 @interface QYLHomeController ()
 
@@ -29,7 +29,7 @@
     //9:18
         type = QYLPhotoClipType9_18;
     }
-    QYLPhotosSelectController *select = [QYLPhotosSelectController selectWithClipType:type];
+    QYLAlbumsController *select = [QYLAlbumsController clipWithType:type];
     [self.navigationController pushViewController:select animated:YES];
 }
 
