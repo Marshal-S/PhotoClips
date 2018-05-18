@@ -24,10 +24,10 @@
     QYLPhotoClipType type;
     if (sender.tag == 20) {
     //1920
-        type = QYLPhotoClipType1080x1920;
+        type = QYLPhotoClipType9_16;
     }else {
     //9:18
-        type = QYLPhotoClipType9_18;
+        type = QYLPhotoClipType1_2;
     }
     QYLAlbumsController *select = [QYLAlbumsController clipWithType:type];
     [self.navigationController pushViewController:select animated:YES];

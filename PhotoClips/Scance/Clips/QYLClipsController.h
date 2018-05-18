@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "QYLPhotoEnum.h"
 
+@class QYLPhotoModel;
+
 @interface QYLClipsController : UIViewController
 
-+ (instancetype)clipsWithType:(QYLPhotoClipType)clipType;
++ (instancetype)clipsWithType:(QYLPhotoClipType)clipType clipsList:(NSArray<QYLPhotoModel *> *)clipsList;
 
 @end

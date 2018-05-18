@@ -10,8 +10,8 @@
 #define QYLPhotoEnum_h
 
 typedef NS_ENUM(NSUInteger, QYLPhotoClipType) {
-    QYLPhotoClipType1080x1920,//1080x1920
-    QYLPhotoClipType9_18,     //9:18
+    QYLPhotoClipType9_16,//9:16
+    QYLPhotoClipType1_2, //1:2
 };
 
 #endif /* QYLPhotoEnum_h */

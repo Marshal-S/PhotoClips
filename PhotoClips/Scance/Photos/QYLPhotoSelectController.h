@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "QYLPhotosManager.h"
+#import "QYLPhotoEnum.h"
 
 @interface QYLPhotoSelectController : UIViewController
 
-+ (instancetype)selectWithAssetCollection:(PHAssetCollection *)assetCollection;
++ (instancetype)selectWithAssetCollection:(PHAssetCollection *)assetCollection clipType:(QYLPhotoClipType)clipType;
 
 @end

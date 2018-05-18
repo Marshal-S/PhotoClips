@@ -11,10 +11,8 @@
 #import "QYLPhotoSelectController.h"
 
 @interface QYLAlbumsController ()
-{
-    QYLPhotoClipType _clipType;
-}
 
+@property (nonatomic, assign) QYLPhotoClipType clipType;
 @property (nonatomic, strong) QYLAlbumsView *albumsView;
 
 @end
@@ -24,7 +22,7 @@
 + (instancetype)clipWithType:(QYLPhotoClipType)clipType {
     QYLAlbumsController *instance = [self new];
     if (instance) {
-        instance->_clipType = clipType;
+        instance.clipType = clipType;
     }
     return instance;
 }
@@ -45,7 +43,7 @@
     }
     Weakify(self);
     [_albumsView setOnClickToSelectBlock:^(NSInteger row) {
-        QYLPhotoSelectController *select = [QYLPhotoSelectController selectWithAssetCollection:albums[row].assetCollection];
+        QYLPhotoSelectController *select = [QYLPhotoSelectController selectWithAssetCollection:albums[row].assetCollection clipType:wself.clipType];
         [wself.navigationController pushViewController:select animated:YES];
     }];
     [self.view addSubview:_albumsView];

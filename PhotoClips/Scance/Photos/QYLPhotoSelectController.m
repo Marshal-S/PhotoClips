@@ -8,6 +8,7 @@
 
 #import "QYLPhotoSelectController.h"
 #import "QYLPhotosView.h"
+#import "QYLClipsController.h"
 #import "QYLLargeImageController.h"
 
 @interface QYLPhotoSelectController ()
@@ -15,6 +16,9 @@
     PHAssetCollection *_assetCollection;
 }
 
+@property (nonatomic, strong) UIButton *btnRight;//导航右侧按钮
+
+@property (nonatomic, assign) QYLPhotoClipType clipType;
 @property (nonatomic, strong) QYLPhotosView *photosView;
 @property (nonatomic, strong) NSMutableArray *selectList;
 
@@ -22,10 +26,11 @@
 
 @implementation QYLPhotoSelectController
 
-+ (instancetype)selectWithAssetCollection:(PHAssetCollection *)assetCollection {
++ (instancetype)selectWithAssetCollection:(PHAssetCollection *)assetCollection clipType:(QYLPhotoClipType)clipType {
     QYLPhotoSelectController *select = [self new];
     if (select) {
         select->_assetCollection = assetCollection;
+        select.clipType = clipType;
     }
     return select;
 }
@@ -33,7 +38,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"图片选择";
+    [self setNavi];
     [self initPhotoView];
+}
+
+- (void)setNavi {
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"裁剪" style:UIBarButtonItemStylePlain target:self action:@selector(onClickToSelect)];
+    self.navigationItem.rightBarButtonItem = right;
 }
 
 - (void)initPhotoView {
@@ -57,6 +68,8 @@
         }else {
             [wself.selectList removeObject:photoModel];
         }
+        long count = wself.selectList.count;
+        [wself.navigationItem.rightBarButtonItem setTitle:[NSString stringWithFormat:@"剪裁%@",count>0?[NSString stringWithFormat:@"(%ld)",count]:@""]];
         return YES;
     }];
     [_photosView setOnClickToCheckLargeBlock:^(NSInteger row) {
@@ -67,7 +80,9 @@
 }
 
 - (void)onClickToSelect {
-    
+    if (_selectList.count < 1) return;
+    QYLClipsController *clip = [QYLClipsController clipsWithType:_clipType clipsList:_selectList];
+    [self.navigationController presentViewController:clip animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

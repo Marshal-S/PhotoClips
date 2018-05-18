@@ -20,11 +20,12 @@
     topHeight = statusBarHeight + 44;
     IS_IPHONEX = statusBarHeight != 20;
     
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor = [UIColor whiteColor];
-
     _window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[NSClassFromString(@"QYLHomeController") new]];
-    
     [_window makeKeyAndVisible];
     return YES;
 }

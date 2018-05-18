@@ -12,15 +12,19 @@
 @interface QYLClipsController ()
 
 @property (nonatomic, assign) QYLPhotoClipType clipType;
+@property (nonatomic, strong) NSArray<QYLPhotoModel *> *clipsList;
+@property (nonatomic, strong) UIImageView *ivClipsImage;
+@property (nonatomic, assign) double ratio;
 
 @end
 
 @implementation QYLClipsController
 
-+ (instancetype)clipsWithType:(QYLPhotoClipType)clipType {
++ (instancetype)clipsWithType:(QYLPhotoClipType)clipType clipsList:(NSArray<QYLPhotoModel *> *)clipsList {
     QYLClipsController *instance = [self new];
     if (instance) {
         instance.clipType = clipType;
+        instance.clipsList = clipsList;
     }
     return instance;
 }
@@ -31,16 +35,20 @@
 }
 
 - (void)initWithContentView {
+    //屏幕宽度
+    CGFloat width = SCREEN_WIDTH;
+    CGFloat height = SCREEN_HEIGHT;
+    //剪裁框的宽和高
+    
     CGRect frame;
     switch (_clipType) {
-        case <#constant#>:
-            <#statements#>
-            break;
+        case QYLPhotoClipType9_16:
             
-        default:
             break;
-    })
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.frame];
+        case QYLPhotoClipType1_2:
+            
+            break;
+    }
     
     
 }
