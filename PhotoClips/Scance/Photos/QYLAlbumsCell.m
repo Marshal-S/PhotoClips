@@ -54,7 +54,7 @@
     QYLPhotoModel *coverPhoto = albumModel.assets[0];
     if (coverPhoto) {
         if (_irID) [[PHImageManager defaultManager] cancelImageRequest:_irID];//取消本次请求
-        _irID = [[QYLPhotosManager sharedInstance] getFastImageWithAsset:coverPhoto.asset targetSize:CGSizeMake(120, 120) resultHandler:^(UIImage *image) {
+        _irID = [[QYLPhotosManager sharedInstance] getFastImageWithAsset:coverPhoto.asset targetSize:CGSizeMake(150, 150) resultHandler:^(UIImage *image) {
             self.ivCover.image = image;
         }];
     }

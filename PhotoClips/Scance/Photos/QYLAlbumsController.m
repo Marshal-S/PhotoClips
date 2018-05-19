@@ -49,11 +49,6 @@
     [self.view addSubview:_albumsView];
 }
 
-- (void)initPhotosView {
-    
-    
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
