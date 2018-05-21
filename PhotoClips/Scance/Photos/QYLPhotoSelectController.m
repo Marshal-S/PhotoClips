@@ -82,7 +82,7 @@
 - (void)onClickToSelect {
     if (_selectList.count < 1) return;
     QYLClipsController *clip = [QYLClipsController clipsWithType:_clipType clipsList:_selectList];
-    [self.navigationController presentViewController:clip animated:YES completion:nil];
+    [self presentViewController:clip animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
