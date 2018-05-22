@@ -12,8 +12,10 @@
 
 @interface QYLClipsController ()
 {
-    CGSize _clipLineSize;//选框大小
-    BOOL _isLargeImageWidthRatio;//图片宽占比比较大么
+    CGRect _clipLineFrame;//选框frame
+    BOOL _widthBigRatio;//图片宽占比比较大
+    CGPoint startPoint;
+    CGPoint originPoint;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *operateBar;
@@ -22,7 +24,7 @@
 @property (nonatomic, strong) NSMutableArray<QYLPhotoModel *> *clipsList;
 @property (nonatomic, strong) UIView *clipsView;//选框
 @property (nonatomic, strong) UIImageView *ivClipsImage;
-@property (nonatomic, assign) double ratio;
+@property (nonatomic, assign) double ratio;//绘制的时候图片或者偏移像素大小要乘上他
 
 @property (nonatomic, assign) BOOL operateHidden;//底部选择框是否消失
 
@@ -58,6 +60,7 @@
 
 - (void)requestImage {
     if (_clipsList.count < 1) return;
+    _ivClipsImage.image = nil;
     [[QYLPhotosManager sharedInstance] getExactImageWithAsset:_clipsList[0].asset resultHandler:^(UIImage *image) {
         [self setUpClipsViewWithImage:image];
     }];
@@ -75,13 +78,16 @@
             needRadio = 0.5;
             break;
     }
+    CGSize clipLineSize = _clipLineFrame.size;
     if (ratio > needRadio) {
         //这里是宽比较大
-        _isLargeImageWidthRatio = YES;
-        size = CGSizeMake(_clipLineSize.height*ratio, _clipLineSize.height);
+        _widthBigRatio = YES;
+        _ratio = size.height/clipLineSize.height;
+        size = CGSizeMake(clipLineSize.height*ratio, clipLineSize.height);
     }else {
-        _isLargeImageWidthRatio = NO;
-        size = CGSizeMake(_clipLineSize.width, _clipLineSize.width/ratio);
+        _widthBigRatio = NO;
+        _ratio = size.width/clipLineSize.width;
+        size = CGSizeMake(clipLineSize.width, clipLineSize.width/ratio);
     }
 
     _ivClipsImage.bounds = CGRectMake(0, 0, size.width, size.height);
@@ -121,13 +127,13 @@
             }
         }break;
     }
-    _clipLineSize = size;
 
+    _clipLineFrame = CGRectMake((width-size.width)/2, (height-size.height)/2, size.width, size.height);
     //绘制选框
-    _clipsView = [[UIView alloc] init];
-    _clipsView.bounds = CGRectMake(0, 0, size.width, size.height);
-    _clipsView.center = CGPointMake(width/2, height/2);
+    _clipsView = [[UIView alloc] initWithFrame:_clipLineFrame];
+    _clipsView.userInteractionEnabled = NO;
     [self.view insertSubview:_clipsView belowSubview:_operateBar];
+    
 }
 
 //初始化手势操作
@@ -154,8 +160,26 @@
 
 //图片移动控制处理
 - (void)clipImageWillScroll:(UIPanGestureRecognizer *)sender {
-    //因为可以上下滑动，所以要根据宽高比来测定
-    
+    CGPoint point = [sender translationInView:self.view];
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        startPoint = point;
+        originPoint = sender.view.frame.origin;
+    }else if (sender.state == UIGestureRecognizerStateChanged) {
+        CGFloat cx = point.x-startPoint.x;
+        CGFloat cy = point.y-startPoint.y;
+        //因为可以上下滑动，所以要根据宽高比来测定
+        CGRect frame = sender.view.frame;
+        if (_widthBigRatio) {
+            //这里会用到cx
+            if (cx + sender.view.s_X > _clipLineFrame.origin.x || sender.view.s_right - cx < _clipLineFrame.origin.x + _clipLineFrame.size.width) return;
+            frame.origin.x = originPoint.x + cx;
+        }else {
+            frame.origin.y = originPoint.y + cy;
+            //这里会用到cy
+            if (cy + sender.view.s_Y > _clipLineFrame.origin.y || sender.view.s_bottom - cy < _clipLineFrame.origin.y + _clipLineFrame.size.height) return;
+        }
+        sender.view.frame = frame;
+    }
 }
 
 - (IBAction)onClickToOperate:(UIButton *)sender {
