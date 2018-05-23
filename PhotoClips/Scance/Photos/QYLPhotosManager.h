@@ -87,7 +87,8 @@
  保存图片到相册
 
  @param image 要保存的图片image
+ @param completed 保存完毕回调
  */
-- (void)savePhotoToAlbum:(UIImage *)image;
+- (void)savePhotoToAlbum:(UIImage *)image completed:(void(^)(BOOL isSuccess))completed;
 
 @end

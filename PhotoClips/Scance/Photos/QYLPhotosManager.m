@@ -116,14 +116,15 @@ PHImageRequestID requestByAsset(PHAsset *asset, PHImageRequestOptionsResizeMode 
     return imageID;
 }
 
-- (void)savePhotoToAlbum:(UIImage *)image {
+- (void)savePhotoToAlbum:(UIImage *)image completed:(void(^)(BOOL isSuccess))completed {
     // 保存图片到自定义相册
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         switch (status) {
             case PHAuthorizationStatusNotDetermined:
+                completed(NO);
                 break;
             case PHAuthorizationStatusAuthorized:
-                [self saveImageAndCreateAlbum:image];
+                [self saveImageAndCreateAlbum:image completed:completed];
                 break;
             case PHAuthorizationStatusDenied:
             case PHAuthorizationStatusRestricted:{
@@ -140,13 +141,14 @@ PHImageRequestID requestByAsset(PHAsset *asset, PHImageRequestOptionsResizeMode 
                     }
                 }]];
                 [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:nil]];
+                completed(NO);
             }break;
         }
     }];
 }
 
 //创建相册并保存图片
-- (void)saveImageAndCreateAlbum:(UIImage *)image {
+- (void)saveImageAndCreateAlbum:(UIImage *)image completed:(void(^)(BOOL isSuccess))completed {
     NSString *KQYLAlbumName = @"PhotoClips";
     // 获取所有自定义相册
     PHFetchResult *albums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
@@ -175,7 +177,7 @@ PHImageRequestID requestByAsset(PHAsset *asset, PHImageRequestOptionsResizeMode 
         assetId = [PHAssetCreationRequest creationRequestForAssetFromImage:image].placeholderForCreatedAsset.localIdentifier;
     } error:&error];
     if (error) {
-        [QYLToast showWithMessage:@"保存图片失败!"];
+        completed(NO);
         return;
     }
     [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
@@ -184,11 +186,8 @@ PHImageRequestID requestByAsset(PHAsset *asset, PHImageRequestOptionsResizeMode 
         // 添加图片到相册中,如果是add就不能显示到封面了，用insert能在封面显示
         [request insertAssets:@[asset] atIndexes:[NSIndexSet indexSetWithIndex:0]];
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
-        if (error) {
-            [QYLToast showWithMessage:@"保存图片失败!"];
-        }else {
-            [QYLToast showWithMessage:@"保存图片成功!"];
-        }
+        BOOL isSuccess = !error;
+        completed(YES);
     }];
 }
 

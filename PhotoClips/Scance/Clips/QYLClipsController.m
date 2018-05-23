@@ -9,10 +9,10 @@
 #import "QYLClipsController.h"
 #import "QYLPhotosManager.h"
 #import "UIView+S_Extend.h"
+#import "QYLProgressView.h"
 
 @interface QYLClipsController ()
 {
-    CGRect _clipLineFrame;//选框frame
     BOOL _widthBigRatio;//图片宽占比比较大
     CGPoint startPoint;
     CGPoint originPoint;
@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UIImageView *ivClipsImage;
 @property (nonatomic, assign) double ratio;//绘制的时候图片或者偏移像素大小要乘上他
 
+@property (nonatomic, assign) CGRect clipLineFrame;//选框frame
 @property (nonatomic, assign) BOOL operateHidden;//底部选择框是否消失
 
 @end
@@ -53,7 +54,6 @@
 - (void)initImageView {
     _ivClipsImage = [[UIImageView alloc] init];
     _ivClipsImage.contentMode = UIViewContentModeScaleAspectFit;
-    _ivClipsImage.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
     _ivClipsImage.userInteractionEnabled = YES;
     [self.view insertSubview:_ivClipsImage belowSubview:_clipsView];
 }
@@ -61,8 +61,10 @@
 - (void)requestImage {
     if (_clipsList.count < 1) return;
     _ivClipsImage.image = nil;
+    [QYLProgressView showInView:self.view];
     [[QYLPhotosManager sharedInstance] getExactImageWithAsset:_clipsList[0].asset resultHandler:^(UIImage *image) {
         [self setUpClipsViewWithImage:image];
+        [QYLProgressView dismiss];
     }];
 }
 
@@ -91,13 +93,14 @@
     }
 
     _ivClipsImage.bounds = CGRectMake(0, 0, size.width, size.height);
+    _ivClipsImage.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
     _ivClipsImage.image = image;
 }
 
 - (void)initClipsView {
     //获取选框大小
-    CGFloat width = SCREEN_WIDTH;
-    CGFloat height = SCREEN_HEIGHT;
+    CGFloat width = SCREEN_WIDTH-30;
+    CGFloat height = SCREEN_HEIGHT-30;
     CGFloat ratio = width/height;
     CGSize size;
     switch (_clipType) {
@@ -108,31 +111,76 @@
                 size = CGSizeMake(needRadio*height, height);
             }else if (ratio < needRadio) {
                 //手机比图片长度上要长一些
-                size = CGSizeMake(width, width/ratio);
+                size = CGSizeMake(width, width/needRadio);
             }else {
                 //两方相同
                 size = CGSizeMake(width, height);
             }
         }break;
         case QYLPhotoClipType1_2:{
-            if (ratio > 0.5) {
+            double needRadio = 0.5;
+            if (ratio > needRadio) {
                 //手机比图片宽度上宽一些
-                size = CGSizeMake(0.5*height, height);
-            }else if (ratio < 0.5) {
+                size = CGSizeMake(needRadio*height, height);
+            }else if (ratio < needRadio) {
                 //手机比图片长度上要长一些
-                size = CGSizeMake(width, width/0.5);
+                size = CGSizeMake(width, width/needRadio);
             }else {
                 //两方相同
                 size = CGSizeMake(width, height);
             }
         }break;
     }
-
-    _clipLineFrame = CGRectMake((width-size.width)/2, (height-size.height)/2, size.width, size.height);
+    
+    _clipLineFrame = CGRectMake((SCREEN_WIDTH-size.width)/2, (SCREEN_HEIGHT-size.height)/2, size.width, size.height);
     //绘制选框
-    _clipsView = [[UIView alloc] initWithFrame:_clipLineFrame];
+    _clipsView = [[UIView alloc] initWithFrame:self.view.frame];
     _clipsView.userInteractionEnabled = NO;
     [self.view insertSubview:_clipsView belowSubview:_operateBar];
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [path appendPath:[[UIBezierPath bezierPathWithRect:_clipLineFrame] bezierPathByReversingPath]];
+    
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.fillColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8].CGColor;
+    layer.backgroundColor = [UIColor clearColor].CGColor;
+    layer.lineWidth = 0;
+    layer.path = path.CGPath;
+    [_clipsView.layer addSublayer:layer];
+    
+    //边界线
+    CGFloat x = _clipLineFrame.origin.x;
+    CGFloat y = _clipLineFrame.origin.y;
+    CGFloat w = _clipLineFrame.size.width;
+    CGFloat h = _clipLineFrame.size.height;
+    CGFloat right = x+w;
+    CGFloat bottom = y+h;
+    CGFloat marginWidth = 10;
+    
+    path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(x-2, y+marginWidth)];
+    [path addLineToPoint:CGPointMake(x-2, y-2)];
+    [path addLineToPoint:CGPointMake(x+marginWidth, y-2)];
+    
+    [path moveToPoint:CGPointMake(right-marginWidth, y-2)];
+    [path addLineToPoint:CGPointMake(right+2, y-2)];
+    [path addLineToPoint:CGPointMake(right+2, y+marginWidth)];
+    
+    [path moveToPoint:CGPointMake(right+2, bottom-marginWidth)];
+    [path addLineToPoint:CGPointMake(right+2, bottom+2)];
+    [path addLineToPoint:CGPointMake(right-marginWidth, bottom+2)];
+    
+    [path moveToPoint:CGPointMake(x-2, bottom-marginWidth)];
+    [path addLineToPoint:CGPointMake(x-2, bottom+2)];
+    [path addLineToPoint:CGPointMake(x+marginWidth, bottom+2)];
+    
+    layer = [CAShapeLayer layer];
+    layer.path = path.CGPath;
+    layer.backgroundColor = [UIColor clearColor].CGColor;
+    layer.lineWidth = 2;
+    layer.strokeColor = [UIColor whiteColor].CGColor;
+    layer.fillColor = [UIColor clearColor].CGColor;
+    [_clipsView.layer addSublayer:layer];
     
 }
 
@@ -155,30 +203,52 @@
             self.operateBar.transform = CGAffineTransformIdentity;
         }
     }];
-    
 }
 
 //图片移动控制处理
 - (void)clipImageWillScroll:(UIPanGestureRecognizer *)sender {
     CGPoint point = [sender translationInView:self.view];
+    CGFloat cx = point.x - startPoint.x;
+    CGFloat cy = point.y - startPoint.y;
     if (sender.state == UIGestureRecognizerStateBegan) {
         startPoint = point;
         originPoint = sender.view.frame.origin;
     }else if (sender.state == UIGestureRecognizerStateChanged) {
-        CGFloat cx = point.x-startPoint.x;
-        CGFloat cy = point.y-startPoint.y;
         //因为可以上下滑动，所以要根据宽高比来测定
         CGRect frame = sender.view.frame;
         if (_widthBigRatio) {
             //这里会用到cx
-            if (cx + sender.view.s_X > _clipLineFrame.origin.x || sender.view.s_right - cx < _clipLineFrame.origin.x + _clipLineFrame.size.width) return;
             frame.origin.x = originPoint.x + cx;
         }else {
-            frame.origin.y = originPoint.y + cy;
             //这里会用到cy
-            if (cy + sender.view.s_Y > _clipLineFrame.origin.y || sender.view.s_bottom - cy < _clipLineFrame.origin.y + _clipLineFrame.size.height) return;
+            frame.origin.y = originPoint.y + cy;
         }
         sender.view.frame = frame;
+    }else if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateCancelled) {
+        if (_widthBigRatio) {
+            if (cx + sender.view.s_X > _clipLineFrame.origin.x) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    sender.view.s_X = self.clipLineFrame.origin.x;
+                }];
+                
+            }else if (sender.view.s_right + cx < _clipLineFrame.origin.x + _clipLineFrame.size.width) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    sender.view.s_X = self.clipLineFrame.size.width+self.clipLineFrame.origin.x-sender.view.s_width;
+                }];
+                
+            }
+        }else {
+            if (cy + sender.view.s_Y > _clipLineFrame.origin.y) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    sender.view.s_Y = self.clipLineFrame.origin.y;
+                }];
+                
+            }else if (sender.view.s_bottom + cy < _clipLineFrame.origin.y + _clipLineFrame.size.height) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    sender.view.s_Y = self.clipLineFrame.size.height+self.clipLineFrame.origin.y-sender.view.s_height;
+                }];
+            }
+        }
     }
 }
 
@@ -189,26 +259,52 @@
         [self backToHome];
     }else if (tag == 102) {
         //跳过
-        [self nextClip];
+        if ([self nextClip]) [self requestImage];
     }else {
         //剪裁
         [self onClickToClip];
-        [self nextClip];
+        if ([self nextClip]) [self requestImage];
     }
+    
 }
 
 //实际剪裁
 - (void)onClickToClip {
+    self.view.userInteractionEnabled = NO;
+    [QYLProgressView showInView:self.view];
     
+    double x = (_clipLineFrame.origin.x - _ivClipsImage.s_X)*_ratio;
+    double y = (_clipLineFrame.origin.y - _ivClipsImage.s_Y)*_ratio;
+    double fWidth = _clipLineFrame.size.width*_ratio; //图片实际宽度
+    double fHeight = _clipLineFrame.size.height*_ratio;//图片实际剪裁的高度
+    UIImage *image = _ivClipsImage.image;
+    CGRect clipRect = CGRectMake(x, y, fWidth, fHeight);
+
+    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, clipRect);
+    UIImage *newImage = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    [[QYLPhotosManager sharedInstance] savePhotoToAlbum:newImage completed:^(BOOL isSuccess) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (isSuccess) {
+                [QYLToast showWithMessage:@"保存图片成功!"];
+            }else {
+                [QYLToast showWithMessage:@"保存图片失败!"];
+            }
+            [QYLProgressView dismiss];
+            self.view.userInteractionEnabled = YES;
+        });
+    }];
 }
 
 //下一张,剪裁的步骤同理
-- (void)nextClip {
+- (BOOL)nextClip {
     [ _clipsList removeObjectAtIndex:0];
     if (_clipsList.count < 1) {
         [self backToHome];
-        [QYLToast showWithMessage:@"本次剪裁已结束!"];
+        return NO;
     }
+    return YES;
 }
 
 //返回到主页

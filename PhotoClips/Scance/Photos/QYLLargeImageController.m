@@ -8,6 +8,7 @@
 
 #import "QYLLargeImageController.h"
 #import "QYLPhotosManager.h"
+#import "QYLProgressView.h"
 
 @interface QYLLargeImageController ()<UIScrollViewDelegate>
 {
@@ -61,8 +62,10 @@
     imageView.center = self.view.center;
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [_scrollView addSubview:imageView];
+    [QYLProgressView showInView:self.view];
     [[QYLPhotosManager sharedInstance] getExactImageWithAsset:_asset resultHandler:^(UIImage *image) {
         imageView.image = image;
+        [QYLProgressView dismiss];
     }];
 }
 
