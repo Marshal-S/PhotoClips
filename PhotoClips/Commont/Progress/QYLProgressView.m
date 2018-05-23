@@ -17,7 +17,7 @@
         progressView = [[self alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         progressView.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
         progressView.bounds = CGRectMake(0, 0, 50, 50);
-        progressView.color = [UIColor redColor];
+        progressView.color = [UIColor whiteColor];
     });
     return progressView;
 }

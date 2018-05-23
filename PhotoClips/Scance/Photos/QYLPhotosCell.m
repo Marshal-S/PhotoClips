@@ -8,6 +8,7 @@
 
 #import "QYLPhotosCell.h"
 #import "QYLPhotosManager.h"
+#import "NSObject+S_Observer.h"
 
 @interface QYLPhotosCell ()
 {
