@@ -13,7 +13,7 @@
 @interface QYLPhotoModel : NSObject
 
 @property (nonatomic, strong) PHAsset *asset;       //图片
-@property (nonatomic, assign) BOOL isUserLibrary;   //是否是本地图库图片
+@property (nonatomic, assign) NSUInteger isUserLibrary;   //是否是本地图库图片 ,0为未定义或者不存在,1是本地的
 @property (nonatomic, assign) BOOL isSelect;        //是否被选中了
 
 @end
@@ -46,6 +46,15 @@
  @return 返回用户自己创建的相册集合
  */
 - (NSArray<NSArray<QYLAblumModel *> *> *)getAllUserCreateAblums;
+
+/**
+ 验证图片是否在本地
+
+ @param asset   图片
+ @param completed 验证完毕回调
+ @param isSynchronized 同步还是异步验证
+ */
+- (PHImageRequestID)verifyPhotoInUserLibraryWithAsset:(PHAsset *)asset completed:(void(^)(BOOL isUserLibrary))completed synchronized:(BOOL)isSynchronized;
 
 /**
  获取所有图片

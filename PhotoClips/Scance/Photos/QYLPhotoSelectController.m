@@ -50,7 +50,8 @@
 - (void)initPhotoView {
     _selectList = [NSMutableArray array];//初始化选中数组
     
-    NSArray<QYLPhotoModel *> *photoList = [[QYLPhotosManager sharedInstance] getAssetsInAssetCollection:_assetCollection ascending:NO];
+    NSArray *photoList = [[QYLPhotosManager sharedInstance] getAssetsInAssetCollection:_assetCollection ascending:NO];
+    
     _photosView = [[QYLPhotosView alloc] initWithFrame:CGRectMake(0, topHeight, SCREEN_WIDTH, SCREEN_HEIGHT-topHeight) photoList:photoList];
     if (@available(iOS 11.0, *)) {
         _photosView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -73,7 +74,7 @@
         return YES;
     }];
     [_photosView setOnClickToCheckLargeBlock:^(NSInteger row) {
-        QYLLargeImageController *large = [[QYLLargeImageController alloc] initWithAsset:photoList[row].asset];
+        QYLLargeImageController *large = [[QYLLargeImageController alloc] initWithPhotoModel:photoList[row]];
         [wself presentViewController:large animated:YES completion:nil];
     }];
     [self.view addSubview:_photosView];

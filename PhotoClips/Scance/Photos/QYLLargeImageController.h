@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class PHAsset;
+@class QYLPhotoModel;
 
 @interface QYLLargeImageController : UIViewController
 
-- (instancetype)initWithAsset:(PHAsset *)asset;
+- (instancetype)initWithPhotoModel:(QYLPhotoModel *)photoModel;
 
 @end

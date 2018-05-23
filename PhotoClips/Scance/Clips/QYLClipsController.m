@@ -315,6 +315,11 @@
     }];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [QYLProgressView dismiss];
+}
+
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }

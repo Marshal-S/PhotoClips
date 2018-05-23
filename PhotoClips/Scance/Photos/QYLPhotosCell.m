@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) UIImageView *ivPreview; //预览图
 @property (nonatomic, strong) UIButton *btnSelect;
+@property (nonatomic, strong) UIImageView *ivDownload;//下载视图，不在本地的需要
 
 
 @end
@@ -44,6 +45,12 @@
     [_btnSelect setImage:[UIImage imageNamed:@"checkbox_s"] forState:UIControlStateSelected];
     [_btnSelect addTarget:self action:@selector(onClickToSelect:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_btnSelect];
+    
+    _ivDownload = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 20, 20)];
+    _ivDownload.contentMode = UIViewContentModeScaleAspectFit;
+    _ivDownload.image = [UIImage imageNamed:@"download"];
+    _ivDownload.hidden = YES;
+    [self.contentView addSubview:_ivDownload];
 }
 
 - (void)updateWithPhotoModel:(QYLPhotoModel *)photoModel {
@@ -52,6 +59,20 @@
     _irID = [[QYLPhotosManager sharedInstance] getFastImageWithAsset:photoModel.asset targetSize:CGSizeMake(240, 240) resultHandler:^(UIImage *image) {
         self.ivPreview.image = image;
     }];
+    
+    Weakify(self);
+    LSObserver(photoModel, isUserLibrary, ObserverCallback(^(id x) {
+        NSLog(@"我被回调了");
+        wself.ivDownload.hidden = [x boolValue];
+    }));
+    
+    if (photoModel.isUserLibrary == -1) {
+        [[QYLPhotosManager sharedInstance] verifyPhotoInUserLibraryWithAsset:photoModel.asset completed:^(BOOL isUserLibrary) {
+            photoModel.isUserLibrary = isUserLibrary;
+        } synchronized:NO];
+    }else {
+        _ivDownload.hidden = photoModel.isUserLibrary;
+    }
     _photoModel = photoModel;
 }
 

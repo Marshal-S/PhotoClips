@@ -11,19 +11,17 @@
 #import "QYLProgressView.h"
 
 @interface QYLLargeImageController ()<UIScrollViewDelegate>
-{
-    PHAsset *_asset;
-}
 
+@property (nonatomic, strong) QYLPhotoModel *photoModel;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
 
 @implementation QYLLargeImageController
 
-- (instancetype)initWithAsset:(PHAsset *)asset {
+- (instancetype)initWithPhotoModel:(QYLPhotoModel *)photoModel; {
     if (self = [super init]) {
-        _asset = asset;
+        _photoModel = photoModel;
     }
     return self;
 }
@@ -63,10 +61,18 @@
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [_scrollView addSubview:imageView];
     [QYLProgressView showInView:self.view];
-    [[QYLPhotosManager sharedInstance] getExactImageWithAsset:_asset resultHandler:^(UIImage *image) {
+    
+    Weakify(self);
+    [[QYLPhotosManager sharedInstance] getExactImageWithAsset:_photoModel.asset resultHandler:^(UIImage *image) {
+        if (image) wself.photoModel.isUserLibrary = 1;
         imageView.image = image;
         [QYLProgressView dismiss];
     }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [QYLProgressView dismiss];
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {

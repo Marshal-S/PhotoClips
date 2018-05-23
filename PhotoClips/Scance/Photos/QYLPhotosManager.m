@@ -58,6 +58,16 @@ QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
     return album;
 }
 
+- (PHImageRequestID)verifyPhotoInUserLibraryWithAsset:(PHAsset *)asset completed:(void(^)(BOOL isUserLibrary))completed synchronized:(BOOL)isSynchronized {
+    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
+    option.resizeMode = PHImageRequestOptionsResizeModeExact;
+    option.networkAccessAllowed = NO;//是否允许从网络上下载，一部分图片不在本地，可能存放到iCloud里面了
+    PHImageRequestID imageID = [[PHCachingImageManager defaultManager] requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        completed(result);
+    }];
+    return imageID;
+}
+
 //获取所有图片,ascending YES为升序
 - (NSArray<QYLPhotoModel *> *)getAllAssetPhotosAblumWithAscending:(BOOL)ascending {
     NSMutableArray *assets = [NSMutableArray array];
@@ -88,7 +98,7 @@ QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
 QYLPhotoModel *createPhotoModel(PHAsset *asset) {
     if (asset.mediaType != PHAssetMediaTypeImage) return nil;//不是图片的直接过滤掉
     QYLPhotoModel *photo = [QYLPhotoModel new];
-    photo.isUserLibrary = (asset.sourceType == PHAssetSourceTypeUserLibrary);
+    photo.isUserLibrary = -1;//默认为还不知道是否在本地，框架里面的那个不能判断，有点坑
     photo.asset = asset;
     return photo;
 }
@@ -186,8 +196,7 @@ PHImageRequestID requestByAsset(PHAsset *asset, PHImageRequestOptionsResizeMode 
         // 添加图片到相册中,如果是add就不能显示到封面了，用insert能在封面显示
         [request insertAssets:@[asset] atIndexes:[NSIndexSet indexSetWithIndex:0]];
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
-        BOOL isSuccess = !error;
-        completed(YES);
+        completed(!error);
     }];
 }
 
