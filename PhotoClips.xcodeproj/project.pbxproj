@@ -16,10 +16,10 @@
 		F36A514320A5391E0087C989 /* QYLAlbumsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514220A5391E0087C989 /* QYLAlbumsController.m */; };
 		F36A514920A539700087C989 /* QYLPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514820A539700087C989 /* QYLPhotosCell.m */; };
 		F36A514C20A586400087C989 /* QYLPhotosManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A514B20A586400087C989 /* QYLPhotosManager.m */; };
+		F36AF65E20B6D3EA009FF284 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F36AF65D20B6D3EA009FF284 /* Launch Screen.storyboard */; };
 		F376E93720B2C26F00F70136 /* QYLClipsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F376E93620B2C26F00F70136 /* QYLClipsController.xib */; };
 		F3AB8EB220A42E4C00EA1F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EB120A42E4C00EA1F05 /* AppDelegate.m */; };
 		F3AB8EBA20A42E4E00EA1F05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3AB8EB920A42E4E00EA1F05 /* Assets.xcassets */; };
-		F3AB8EBD20A42E4E00EA1F05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3AB8EBB20A42E4E00EA1F05 /* LaunchScreen.storyboard */; };
 		F3AB8EC020A42E4E00EA1F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EBF20A42E4E00EA1F05 /* main.m */; };
 		F3AB8ECA20A42E4F00EA1F05 /* PhotoClipsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8EC920A42E4F00EA1F05 /* PhotoClipsTests.m */; };
 		F3AB8ED520A42E4F00EA1F05 /* PhotoClipsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB8ED420A42E4F00EA1F05 /* PhotoClipsUITests.m */; };
@@ -71,12 +71,12 @@
 		F36A514820A539700087C989 /* QYLPhotosCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotosCell.m; sourceTree = "<group>"; };
 		F36A514A20A586400087C989 /* QYLPhotosManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QYLPhotosManager.h; sourceTree = "<group>"; };
 		F36A514B20A586400087C989 /* QYLPhotosManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QYLPhotosManager.m; sourceTree = "<group>"; };
+		F36AF65D20B6D3EA009FF284 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F376E93620B2C26F00F70136 /* QYLClipsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QYLClipsController.xib; sourceTree = "<group>"; };
 		F3AB8EAD20A42E4C00EA1F05 /* PhotoClips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoClips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3AB8EB020A42E4C00EA1F05 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F3AB8EB120A42E4C00EA1F05 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F3AB8EB920A42E4E00EA1F05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F3AB8EBC20A42E4E00EA1F05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F3AB8EBE20A42E4E00EA1F05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3AB8EBF20A42E4E00EA1F05 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F3AB8EC520A42E4E00EA1F05 /* PhotoClipsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoClipsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,7 +183,7 @@
 				F3AB8EB120A42E4C00EA1F05 /* AppDelegate.m */,
 				F3AB8F0820A44C7F00EA1F05 /* QYLPhotoClips.pch */,
 				F3AB8EB920A42E4E00EA1F05 /* Assets.xcassets */,
-				F3AB8EBB20A42E4E00EA1F05 /* LaunchScreen.storyboard */,
+				F36AF65D20B6D3EA009FF284 /* Launch Screen.storyboard */,
 				F3AB8EBE20A42E4E00EA1F05 /* Info.plist */,
 				F3AB8EBF20A42E4E00EA1F05 /* main.m */,
 			);
@@ -396,7 +396,7 @@
 			files = (
 				F376E93720B2C26F00F70136 /* QYLClipsController.xib in Resources */,
 				F3AB8EF820A432EC00EA1F05 /* QYLHomeController.xib in Resources */,
-				F3AB8EBD20A42E4E00EA1F05 /* LaunchScreen.storyboard in Resources */,
+				F36AF65E20B6D3EA009FF284 /* Launch Screen.storyboard in Resources */,
 				F3AB8EBA20A42E4E00EA1F05 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,17 +475,6 @@
 			targetProxy = F3AB8ED120A42E4F00EA1F05 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F3AB8EBB20A42E4E00EA1F05 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F3AB8EBC20A42E4E00EA1F05 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F3AB8ED720A42E4F00EA1F05 /* Debug */ = {

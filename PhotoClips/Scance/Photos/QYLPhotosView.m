@@ -42,7 +42,7 @@ static NSString *kQYLPhotosIdentifier = @"kQYLPhotosIdentifier";
     self.backgroundColor = [UIColor whiteColor];
     
     NSInteger column = 3; //列数
-    CGFloat width = (self.frame.size.width - lineWidth*(column+1))/column;
+    CGFloat width = (self.frame.size.width - lineWidth*(column+1)-1)/column; //有时候像素上会出现一点误差，这里多减去一个像素
     _size = CGSizeMake(width, width);
 }
 
