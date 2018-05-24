@@ -14,6 +14,7 @@
 @interface QYLClipsController ()
 {
     BOOL _widthBigRatio;//图片宽占比比较大
+    double _needRatio;
     CGPoint startPoint;
     CGPoint originPoint;
 }
@@ -45,10 +46,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initNeedRatio];
     [self initClipsView];
     [self initImageView];
     [self requestImage];
     [self initGes];
+}
+
+//获取需求比例
+- (void)initNeedRatio {
+    switch (_clipType) {
+        case QYLPhotoClipType9_16:
+            _needRatio = 9.0/16;
+            break;
+        case QYLPhotoClipType1_2:
+            _needRatio = 0.5;
+            break;
+        case QYLPhotoClipTypeCustom:
+            _needRatio = [[[NSUserDefaults standardUserDefaults] objectForKey:QYLPhotoCustomRatio] doubleValue];
+            break;
+    }
 }
 
 - (void)initImageView {
@@ -71,17 +88,8 @@
 - (void)setUpClipsViewWithImage:(UIImage *)image {
     CGSize size = image.size;
     double ratio = size.width/size.height;
-    double needRadio = 0;
-    switch (_clipType) {
-        case QYLPhotoClipType9_16:
-            needRadio = 9.0/16;
-            break;
-        case QYLPhotoClipType1_2:
-            needRadio = 0.5;
-            break;
-    }
     CGSize clipLineSize = _clipLineFrame.size;
-    if (ratio > needRadio) {
+    if (ratio > _needRatio) {
         //这里是宽比较大
         _widthBigRatio = YES;
         _ratio = size.height/clipLineSize.height;
@@ -103,35 +111,16 @@
     CGFloat height = SCREEN_HEIGHT-30;
     CGFloat ratio = width/height;
     CGSize size;
-    switch (_clipType) {
-        case QYLPhotoClipType9_16:{
-            double needRadio = 9.0/16;
-            if (ratio > needRadio) {
-                //手机比图片宽度上宽一些,此时按照手机长度加上需要radio来定框
-                size = CGSizeMake(needRadio*height, height);
-            }else if (ratio < needRadio) {
-                //手机比图片长度上要长一些
-                size = CGSizeMake(width, width/needRadio);
-            }else {
-                //两方相同
-                size = CGSizeMake(width, height);
-            }
-        }break;
-        case QYLPhotoClipType1_2:{
-            double needRadio = 0.5;
-            if (ratio > needRadio) {
-                //手机比图片宽度上宽一些
-                size = CGSizeMake(needRadio*height, height);
-            }else if (ratio < needRadio) {
-                //手机比图片长度上要长一些
-                size = CGSizeMake(width, width/needRadio);
-            }else {
-                //两方相同
-                size = CGSizeMake(width, height);
-            }
-        }break;
+    if (ratio > _needRatio) {
+        //手机比图片宽度上宽一些,此时按照手机长度加上需要radio来定框
+        size = CGSizeMake(_needRatio*height, height);
+    }else if (ratio < _needRatio) {
+        //手机比图片长度上要长一些
+        size = CGSizeMake(width, width/_needRatio);
+    }else {
+        //两方相同
+        size = CGSizeMake(width, height);
     }
-    
     _clipLineFrame = CGRectMake((SCREEN_WIDTH-size.width)/2, (SCREEN_HEIGHT-size.height)/2, size.width, size.height);
     //绘制选框
     _clipsView = [[UIView alloc] initWithFrame:self.view.frame];
@@ -265,7 +254,6 @@
         [self onClickToClip];
         if ([self nextClip]) [self requestImage];
     }
-    
 }
 
 //实际剪裁

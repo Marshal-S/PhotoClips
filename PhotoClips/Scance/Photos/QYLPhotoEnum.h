@@ -12,6 +12,9 @@
 typedef NS_ENUM(NSUInteger, QYLPhotoClipType) {
     QYLPhotoClipType9_16,//9:16
     QYLPhotoClipType1_2, //1:2
+    QYLPhotoClipTypeCustom //自定义
 };
+
+#define QYLPhotoCustomRatio @"QYLPhotoCustomRatio"
 
 #endif /* QYLPhotoEnum_h */

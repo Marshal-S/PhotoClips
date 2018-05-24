@@ -7,7 +7,7 @@
 //
 
 #import "QYLPhotosManager.h"
-#import "QYLCommonUtil.h"
+#import "NSObject+S_Observer.h"
 
 @implementation QYLPhotosManager
 
@@ -63,7 +63,7 @@ QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
     option.resizeMode = PHImageRequestOptionsResizeModeExact;
     option.networkAccessAllowed = NO;//是否允许从网络上下载，一部分图片不在本地，可能存放到iCloud里面了
     PHImageRequestID imageID = [[PHCachingImageManager defaultManager] requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-        completed(result);
+        completed(result != nil);
     }];
     return imageID;
 }
@@ -208,6 +208,10 @@ PHImageRequestID requestByAsset(PHAsset *asset, PHImageRequestOptionsResizeMode 
 @end
 
 @implementation QYLPhotoModel
+
+- (void)dealloc {
+    [self s_cancelObserver];
+}
 
 @end
 

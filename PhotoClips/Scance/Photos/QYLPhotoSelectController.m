@@ -61,10 +61,10 @@
     Weakify(self);
     [_photosView setOnClickToSelectBlock:^(QYLPhotoModel *photoModel, BOOL selected) {
         if (selected) {
-            if (wself.selectList.count > 10) {
-                [QYLToast showWithMessage:@"最多选取10个!"];
-                return NO;
-            }
+//            if (wself.selectList.count > 10) {
+//                [QYLToast showWithMessage:@"最多选取10个!"];
+//                return NO;
+//            }
             [wself.selectList addObject:photoModel];
         }else {
             [wself.selectList removeObject:photoModel];

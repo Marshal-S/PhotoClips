@@ -62,7 +62,6 @@
     
     Weakify(self);
     LSObserver(photoModel, isUserLibrary, ObserverCallback(^(id x) {
-        NSLog(@"我被回调了");
         wself.ivDownload.hidden = [x boolValue];
     }));
     
