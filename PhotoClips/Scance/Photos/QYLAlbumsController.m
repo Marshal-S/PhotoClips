@@ -15,7 +15,6 @@
 
 @property (nonatomic, assign) QYLPhotoClipType clipType;
 @property (nonatomic, strong) QYLAlbumsView *albumsView;
-@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -41,8 +40,6 @@
     if (status == PHAuthorizationStatusAuthorized) {
         [self initAlbumsView];
         return;
-    }else {
-        [self startTimer];
     }
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         switch (status) {
@@ -60,27 +57,12 @@
                 });
             }break;
             case PHAuthorizationStatusAuthorized:{
-                [self initAlbumsView];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self initAlbumsView];
+                });
             }break;
         }
     }];
-}
-
-- (void)startTimer {
-    if (!_timer) {
-        _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(loadAlbumsView) userInfo:nil repeats:YES];
-        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-    }
-}
-
-- (void)loadAlbumsView {
-    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
-    if (status == PHAuthorizationStatusAuthorized) {
-        [_timer invalidate];
-        _timer = nil;
-        [self initAlbumsView];
-        return;
-    }
 }
 
 - (void)initAlbumsView {
