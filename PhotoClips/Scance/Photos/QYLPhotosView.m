@@ -46,6 +46,24 @@ static NSString *kQYLPhotosIdentifier = @"kQYLPhotosIdentifier";
     _size = CGSizeMake(width, width);
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (!self.decelerating) {
+        [self loadCollectionImages];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self loadCollectionImages];
+}
+
+- (void)loadCollectionImages {
+    NSArray *indexPaths = self.indexPathsForVisibleItems;
+    for (NSIndexPath *indexPath in indexPaths) {
+        QYLPhotosCell *cell = (QYLPhotosCell *)[self cellForItemAtIndexPath:indexPath];
+        [cell loadImageWithPhotoModel:_photoList[indexPath.row]];
+    }
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return _photoList.count;
 }
@@ -54,6 +72,7 @@ static NSString *kQYLPhotosIdentifier = @"kQYLPhotosIdentifier";
     QYLPhotosCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQYLPhotosIdentifier forIndexPath:indexPath];
     QYLPhotoModel *photoModel = _photoList[indexPath.row];
     [cell updateWithPhotoModel:photoModel];
+    if (!self.decelerating && !self.dragging) [cell loadImageWithPhotoModel:photoModel];//非拖动时加载
     Weakify(self);
     [cell setSelectBlock:^(BOOL selected) {
         return wself.onClickToSelectBlock(photoModel, selected);

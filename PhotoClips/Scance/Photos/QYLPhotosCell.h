@@ -16,4 +16,6 @@
 
 - (void)updateWithPhotoModel:(QYLPhotoModel *)photoModel;
 
+- (void)loadImageWithPhotoModel:(QYLPhotoModel *)photoModel;
+
 @end

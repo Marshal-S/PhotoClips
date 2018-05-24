@@ -55,24 +55,30 @@
 
 - (void)updateWithPhotoModel:(QYLPhotoModel *)photoModel {
     _btnSelect.selected = photoModel.isSelect;
-    [[PHImageManager defaultManager] cancelImageRequest:_irID];
-    _irID = [[QYLPhotosManager sharedInstance] getFastImageWithAsset:photoModel.asset targetSize:CGSizeMake(240, 240) resultHandler:^(UIImage *image) {
-        self.ivPreview.image = image;
-    }];
-    
     Weakify(self);
     LSObserver(photoModel, isUserLibrary, ObserverCallback(^(id x) {
         wself.ivDownload.hidden = [x boolValue];
     }));
     
+    _ivPreview.image = [UIImage imageNamed:@"placeholderImage"];
+    if (photoModel.isUserLibrary != -1) {
+        _ivDownload.hidden = photoModel.isUserLibrary;
+    }else {
+        _ivDownload.hidden = YES;
+    }
+    _photoModel = photoModel;
+}
+
+- (void)loadImageWithPhotoModel:(QYLPhotoModel *)photoModel {
+    _irID = [[QYLPhotosManager sharedInstance] getFastImageWithAsset:photoModel.asset targetSize:CGSizeMake(240, 240) resultHandler:^(UIImage *image) {
+        self.ivPreview.image = image;
+    }];
+    [[PHImageManager defaultManager] cancelImageRequest:_irID];
     if (photoModel.isUserLibrary == -1) {
         [[QYLPhotosManager sharedInstance] verifyPhotoInUserLibraryWithAsset:photoModel.asset completed:^(BOOL isUserLibrary) {
             photoModel.isUserLibrary = isUserLibrary;
         } synchronized:NO];
-    }else {
-        _ivDownload.hidden = photoModel.isUserLibrary;
     }
-    _photoModel = photoModel;
 }
 
 - (void)onClickToSelect:(UIButton *)sender {
