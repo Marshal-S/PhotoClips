@@ -29,11 +29,6 @@
 }
 
 - (IBAction)onClickToClipsImage:(UIButton *)sender {
-    if ([_tfLeft isFirstResponder] || [_tfRight isFirstResponder]) {
-        [self hiddenKeyboard];
-        return;
-    }
-    
     QYLPhotoClipType type;
     if (sender.tag == 20) {
     //1920
