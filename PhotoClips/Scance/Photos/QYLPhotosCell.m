@@ -70,10 +70,10 @@
 }
 
 - (void)loadImageWithPhotoModel:(QYLPhotoModel *)photoModel {
+    [[PHImageManager defaultManager] cancelImageRequest:_irID];
     _irID = [[QYLPhotosManager sharedInstance] getFastImageWithAsset:photoModel.asset targetSize:CGSizeMake(240, 240) resultHandler:^(UIImage *image) {
         self.ivPreview.image = image;
     }];
-    [[PHImageManager defaultManager] cancelImageRequest:_irID];
     if (photoModel.isUserLibrary == -1) {
         [[QYLPhotosManager sharedInstance] verifyPhotoInUserLibraryWithAsset:photoModel.asset completed:^(BOOL isUserLibrary) {
             photoModel.isUserLibrary = isUserLibrary;
