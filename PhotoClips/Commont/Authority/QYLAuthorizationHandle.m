@@ -25,7 +25,7 @@
             AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
             if (status == AVAuthorizationStatusRestricted || status == AVAuthorizationStatusDenied) {
                 authorStr = @"相机";
-                remindStr = @"将无法使用扫码充电或者拍照功能！";
+                remindStr = @"将无法使用拍照功能！";
             }
             break;
         }
@@ -33,7 +33,7 @@
             PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
             if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied) {
                 authorStr = @"相册";
-                remindStr = @"将无法使用更换头像功能！";
+                remindStr = @"将无法使用相册内图片剪裁功能！";
             }
             break;
         }

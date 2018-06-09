@@ -14,7 +14,6 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     topHeight = statusBarHeight + 44;
