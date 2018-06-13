@@ -94,8 +94,8 @@ QYLAblumModel *createAblumModel(PHAssetCollection *assetCollection) {
     return assets;
 }
 
-//根据asset生成单张图片的model
-QYLPhotoModel *createPhotoModel(PHAsset *asset) {
+//根据asset生成单张图片的model,使用的内联函数，减少函数执行过程中，内存申请、参数传递、地址偏移等因素造成的性能消耗，但是谨慎使用，函数体要小功能简单
+static inline QYLPhotoModel *createPhotoModel(PHAsset *asset) {
     if (asset.mediaType != PHAssetMediaTypeImage) return nil;//不是图片的直接过滤掉
     QYLPhotoModel *photo = [QYLPhotoModel new];
     photo.isUserLibrary = -1;//默认为还不知道是否在本地，框架里面的那个不能判断，有点坑
